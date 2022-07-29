@@ -2,12 +2,12 @@
 
 from typing import Dict, Any, Tuple, List
 from collections import Counter
+import json
+import pkgutil
 import logging
 import re
 import networkx as nx
 import matplotlib.pyplot as plt
-import json
-import pkgutil
 import numpy as np
 
 logging.basicConfig(format='%(asctime)s - %(message)s',
@@ -32,7 +32,7 @@ class RakunKeyphraseDetector:
         self.bigram_counts = None
         self.final_keywords = None
         self.node_ranks = None
-        self.G = None
+        self.main_graph = None
         self.term_counts = None
 
         if self.verbose:
@@ -80,7 +80,7 @@ class RakunKeyphraseDetector:
         if self.verbose:
             logging.info("Visualizing network")
         plt.figure(1, figsize=(10, 10), dpi=300)
-        pos = nx.spring_layout(self.G, iterations=10)
+        pos = nx.spring_layout(self.main_graph, iterations=10)
 
         node_colors = [x[1] * 1000 for x in self.node_ranks.items()]
         sorted_top_k = np.argsort([x[1] for x in self.node_ranks.items()
@@ -95,18 +95,18 @@ class RakunKeyphraseDetector:
                 final_colors.append("gray")
                 final_sizes.append(node_size)
 
-        nx.draw_networkx_nodes(self.G,
+        nx.draw_networkx_nodes(self.main_graph,
                                pos,
                                node_size=final_sizes,
                                node_color=final_colors,
                                alpha=alpha)
-        nx.draw_networkx_edges(self.G,
+        nx.draw_networkx_edges(self.main_graph,
                                pos,
                                width=link_width,
                                arrowsize=arrowsize)
 
         if labels:
-            nx.draw_networkx_labels(self.G,
+            nx.draw_networkx_labels(self.main_graph,
                                     pos,
                                     font_size=font_size,
                                     font_color="red")
@@ -131,7 +131,7 @@ class RakunKeyphraseDetector:
     def get_document_graph(self, weight: int = 1):
         """ A method for obtaining the token graph """
 
-        self.G = nx.DiGraph()
+        self.main_graph = nx.DiGraph()
         num_tokens = len(self.tokens)
 
         for i in range(num_tokens):
@@ -139,26 +139,25 @@ class RakunKeyphraseDetector:
                 node_u = self.tokens[i].lower()
                 node_v = self.tokens[i + 1].lower()
 
-                if self.G.has_edge(node_u, node_v):
-                    self.G[node_u][node_v]['weight'] += weight
+                if self.main_graph.has_edge(node_u, node_v):
+                    self.main_graph[node_u][node_v]['weight'] += weight
 
                 else:
-                    weight = weight
-                    self.G.add_edge(node_u, node_v, weight=weight)
+                    self.main_graph.add_edge(node_u, node_v, weight=weight)
 
-        self.G.remove_edges_from(nx.selfloop_edges(self.G))
+        self.main_graph.remove_edges_from(nx.selfloop_edges(self.main_graph))
         personalization = {a: self.term_counts[a] for a in self.tokens}
 
-        if len(self.G) > self.hyperparameters['num_keywords']:
+        if len(self.main_graph) > self.hyperparameters['num_keywords']:
             self.node_ranks = \
-                nx.pagerank(self.G, alpha=self.hyperparameters["alpha"],
+                nx.pagerank(self.main_graph, alpha=self.hyperparameters["alpha"],
                             max_iter=self.hyperparameters["max_iter"],
                             personalization=personalization).items()
 
             self.node_ranks = [[k, v] for k, v in self.node_ranks]
         else:
 
-            self.node_ranks = [[k, 1.0] for k in self.G.nodes()]
+            self.node_ranks = [[k, 1.0] for k in self.main_graph.nodes()]
 
         token_list = [k for k, v in self.node_ranks]
         rank_distribution = np.array([y for x, y in self.node_ranks])
@@ -176,11 +175,14 @@ class RakunKeyphraseDetector:
                 full_document = doc.read().split("\n")
 
         elif input_type == "string":
-            if type(document) == list:
+            if isinstance(document) == list:
                 return document
 
-            elif type(document) == str:
+            elif isinstance(document) == str:
                 full_document = document.split("\n")
+
+            else:
+                raise NotImplementedError("Input type not recognized (str, list)")
 
         else:
             raise NotImplementedError("Please select valid input type (file, string)")

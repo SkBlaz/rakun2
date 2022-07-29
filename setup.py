@@ -2,12 +2,13 @@
 
 from os import path
 from setuptools import setup, find_packages
-from setuptools.extension import Extension
 
 
 def parse_requirements(file):
+    """ Generic requirement parser """
+    
     required_packages = []
-    with open(path.join(path.dirname(__file__), file)) as req_file:
+    with open(path.join(path.dirname(__file__), file), encoding="utf-8") as req_file:
         for line in req_file:
             required_packages.append(line.strip())
     return required_packages
