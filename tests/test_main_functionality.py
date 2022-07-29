@@ -1,24 +1,5 @@
-# RaKUn 2.0
-This is the repository containing the implementation of RaKUn 2.0, a very fast keyphrase extraction algorithm suitable for large-scale keyphrase detection.
-
-# Installation and setup
-The tool is distributed as a simple-to-use Python library. Simply
-
-```python
-pip install rakun2
-```
-Next, verify that main configurations of the algorithm return sensible results
-
-```python
-python -m pytest ./tests/test_main_functionality.py 
-```
-If all tests pass, you should be good to go.
-
-# Examples
-A simple self-contained example of keyphrases extracted from the Wiki article on Artificial Intelligence follows:
-
-```python
-
+import pytest
+import numpy as np
 from rakun2 import RakunKeyphraseDetector
 
 example_document = """
@@ -207,7 +188,7 @@ Many problems in AI can be solved theoretically by intelligently searching throu
 Simple exhaustive searches[95] are rarely sufficient for most real-world problems: the search space (the number of places to search) quickly grows to astronomical numbers. The result is a search that is too slow or never completes. The solution, for many problems, is to use "heuristics" or "rules of thumb" that prioritize choices in favor of those more likely to reach a goal and to do so in a shorter number of steps. In some search methodologies, heuristics can also serve to eliminate some choices unlikely to lead to a goal (called "pruning the search tree"). Heuristics supply the program with a "best guess" for the path on which the solution lies.[96] Heuristics limit the search for solutions into a smaller sample size.[97]
 A particle swarm seeking the global minimum
 
-A very different kind of search came to prominence in the 1990s, based on the mathematical theory of optimization. For many problems, it is possible to begin the search with some form of a guess and then refine the guess incrementally until no more refinements can be made. These algor can be visualized as blind hill climbing: we begin the search at a random point on the landscape, and then, by jumps or steps, we keep moving our guess uphill, until we reach the top. Other related optimization algorithms include random optimization, beam search and metaheuristics like simulated annealing.[98] Evolutionary computation uses a form of optimization search. For example, they may begin with a population of organisms (the guesses) and then allow them to mutate and recombine, selecting only the fittest to survive each generation (refining the guesses). Classic evolutionary algorithms include genetic algorithms, gene expression programming, and genetic programming.[99] Alternatively, distributed search processes can coordinate via swarm intelligence algorithms. Two popular swarm algorithms used in search are particle swarm optimization (inspired by bird flocking) and ant colony optimization (inspired by ant trails).[100]
+A very different kind of search came to prominence in the 1990s, based on the mathematical theory of optimization. For many problems, it is possible to begin the search with some form of a guess and then refine the guess incrementally until no more refinements can be made. These algorithms can be visualized as blind hill climbing: we begin the search at a random point on the landscape, and then, by jumps or steps, we keep moving our guess uphill, until we reach the top. Other related optimization algorithms include random optimization, beam search and metaheuristics like simulated annealing.[98] Evolutionary computation uses a form of optimization search. For example, they may begin with a population of organisms (the guesses) and then allow them to mutate and recombine, selecting only the fittest to survive each generation (refining the guesses). Classic evolutionary algorithms include genetic algorithms, gene expression programming, and genetic programming.[99] Alternatively, distributed search processes can coordinate via swarm intelligence algorithms. Two popular swarm algorithms used in search are particle swarm optimization (inspired by bird flocking) and ant colony optimization (inspired by ant trails).[100]
 Logic
 Main articles: Logic programming and Automated reasoning
 
@@ -222,42 +203,24 @@ Many problems in AI (including in reasoning, planning, learning, perception, and
 
 A key concept from the science of economics is "utility", a measure of how valuable something is to an intelligent agent. Precise mathematical tools have been developed that analyze how an agent can make choices and plan, using decision theory, decision analysis,[115] and information value theory.[116] These tools include models such as Markov decision processes,[117] dynamic decision networks,[114] game theory and mechanism design.[118] 
 """
-hyperparameters = {"num_keywords": 10,
-                   "merge_threshold": 1.1,
-                   "alpha": 0.3,
-                   "token_prune_len": 3}
 
-keyword_detector = RakunKeyphraseDetector(hyperparameters)
-out_keywords = keyword_detector.find_keywords(example_document, input_type="string")
-print(out_keywords)
 
-keyword_detector.visualize_network()
+@pytest.mark.parametrize("threshold", [0.5, 0.8, 1, 2])
+@pytest.mark.parametrize("alpha", [0.2, 0.5, 0.85, 1.0])
+@pytest.mark.parametrize("prune_len", [1, 2, 3, 4, 5])
+@pytest.mark.parametrize("num_keywords_inp", [5, 10, 25, 50, 100])
+def test_retrieved_keyphrases_num(num_keywords_inp, threshold, alpha,
+                                  prune_len):
 
-```
-yielding output of form
+    hyperparameters = {
+        "num_keywords": num_keywords_inp,
+        "merge_threshold": threshold,
+        "alpha": alpha,
+        "token_prune_len": prune_len
+    }
 
-```python
-[['artificial intelligence', 0.08474054515392176], ['language processing', 0.03638840245426618], ['neural networks', 0.03255498541195155], ['commonsense knowledge', 0.03193301638067184], ['machine learning', 0.024576780024462185], ['symbolic approaches', 0.021580271162964505], ['knowledge representation', 0.02034766036207491], ['natural language', 0.01958061173072567], ['mathematical optimization', 0.018821587677279872], ['optimization inspired', 0.015994688673809803], ['deep learning', 0.015271439269439257]]
-```
-
-and the generic visualization of form (feel free to adapt/zoom to your preference!)
-
-![Image](./examples/networkVisualization.png "AI wiki visualization")
-
-# Hyperparameters
-The main hyperparameter which should be considered "per usecase" is `merge_threshold`, others are also documented below:
-
-| Hyperparameter  | Range           | Description                                                                   |
-|-----------------|-----------------|-------------------------------------------------------------------------------|
-| num_keywords    | int             | Number of keywords to be returned.                                            |
-| merge_threshold | float ([0,inf]) | A parameter determining when to merge nodes (higher = more merged nodes).     |
-| alpha           | float ([0,1])   | The traversal parameter (PageRank's Alpha)                                    |
-| token_prune_len | int             | Lower length bound below which tokens are discarded during graph construction |
-
-# Containers and environments
-A ready-to-go Singularity container can be obtained by invoking
-
-```bash
-bash generate.sh 
-```
-From `containers` folder. The command will build a `rakun2.sif` image, you can use as any other Singularity container (`singularity exec rakun2.sif python {YourFileThatCallsTheLib}`. Further, `conda` users have `environment.yml` available, as well as `requirements.txt` (`pip install -r requirements.txt; pip install . --upgrade` for local install).
+    keyword_detector = RakunKeyphraseDetector(hyperparameters)
+    out_keywords = keyword_detector.find_keywords(example_document,
+                                                  input_type="string")
+    assert len(out_keywords) == num_keywords_inp
+    assert len([x for x in out_keywords if not x]) == 0

@@ -1,4 +1,4 @@
-from rakun2 import RakunDetector
+from rakun2 import RakunKeyphraseDetector
 
 example_document = """
 Artificial intelligence (AI) is intelligence demonstrated by machines, as opposed to the natural intelligence displayed by animals including humans. AI research has been defined as the field of study of intelligent agents, which refers to any system that perceives its environment and takes actions that maximize its chance of achieving its goals.[a]
@@ -206,7 +206,7 @@ hyperparameters = {"num_keywords": 10,
                    "alpha": 0.3,
                    "token_prune_len": 3}
 
-keyword_detector = RakunDetector(hyperparameters)
+keyword_detector = RakunKeyphraseDetector(hyperparameters)
 out_keywords = keyword_detector.find_keywords(example_document, input_type="string")
 print(out_keywords)
 

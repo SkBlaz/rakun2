@@ -13,7 +13,7 @@ logging.basicConfig(format='%(asctime)s - %(message)s',
 logging.getLogger(__name__).setLevel(logging.INFO)
 
 
-class RakunDetector:
+class RakunKeyphraseDetector:
     """
     The main RaKUn2.0 class
     """
@@ -295,4 +295,4 @@ class RakunDetector:
         self.merge_tokens()
         self.get_document_graph()
         self.combine_keywords()
-        return self.final_keywords[:(self.hyperparameters['num_keywords'] + 1)]
+        return self.final_keywords[:self.hyperparameters['num_keywords']]
