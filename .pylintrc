@@ -1,0 +1,5 @@
+[MESSAGES CONTROL]
+disable=
+    too-many-instance-attributes,
+	dangerous-default-value,
+	too-many-arguments
