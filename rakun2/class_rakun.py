@@ -1,3 +1,5 @@
+""" Main RaKUN 2.0 algorithm - DS paper 2022 """
+
 from typing import Dict, Any, Tuple, List
 import numpy as np
 from collections import Counter
@@ -23,6 +25,9 @@ class RakunKeyphraseDetector:
                  verbose: bool = True):
 
         self.verbose = verbose
+        self.tokens = None
+        self.sorted_terms_tf = None
+        
         if self.verbose:
             logging.info("Initiated a keyword detector instance.")
 
@@ -166,6 +171,9 @@ class RakunKeyphraseDetector:
 
             elif type(document) == str:
                 full_document = document.split("\n")
+                
+        else:
+            raise NotImplementedError("Please select valid input type (file, string)")
 
         return full_document
 

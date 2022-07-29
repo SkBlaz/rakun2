@@ -211,6 +211,9 @@ A key concept from the science of economics is "utility", a measure of how valua
 @pytest.mark.parametrize("num_keywords_inp", [5, 10, 25, 50, 100])
 def test_retrieved_keyphrases_num(num_keywords_inp, threshold, alpha,
                                   prune_len):
+    """
+    A generic test covering main usecases.
+    """
 
     hyperparameters = {
         "num_keywords": num_keywords_inp,
