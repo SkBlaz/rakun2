@@ -1,0 +1,14 @@
+certifi>=2022.5.18.1
+cycler>=0.11.0
+fonttools>=4.33.3
+kiwisolver>=1.4.2
+matplotlib>=3.5.2
+networkx>=2.8.2
+numpy>=1.22.4
+packaging>=21.3
+Pillow>=9.1.1
+pyparsing>=3.0.9
+python-dateutil>=2.8.2
+scipy>=1.8.1
+six>=1.16.0
+tqdm>=4.60
