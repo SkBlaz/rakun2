@@ -4,7 +4,7 @@ This is the repository containing the implementation of RaKUn 2.0, a very fast k
 # Installation and setup
 The tool is distributed as a simple-to-use Python library. Simply
 
-```
+```python
 pip install rakun2
 ```
 and you should be good to go.
@@ -12,7 +12,7 @@ and you should be good to go.
 # Examples
 A simple self-contained example follows
 
-```
+```python
 
 from rakun2 import RakunDetector
 
@@ -33,7 +33,7 @@ keyword_detector.visualize_network()
 ```
 yielding output of form
 
-```
+```python
 [['social effects', 0.27676000055526456], ['lasting social', 0.27674828905427873], ['warfare caused', 0.2767102868585031], ['trench warfare', 0.2765782309497358], ['generation', 0.19755587924981133], ['fatalities', 0.19587668920788176], ['disruption', 0.19459785451097245], ['armed forces', 0.17181056678829099], ['regions', 0.13819025211059133], ['engaged', 0.1349471915548533], ['allies', 0.11675871270658346]]
 ```
 
