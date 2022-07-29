@@ -1,4 +1,5 @@
-## main setup file
+""" Main setup file """
+
 from os import path
 from setuptools import setup, find_packages
 from setuptools.extension import Extension

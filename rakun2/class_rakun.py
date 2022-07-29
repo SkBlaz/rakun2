@@ -1,7 +1,6 @@
 """ Main RaKUN 2.0 algorithm - DS paper 2022 """
 
 from typing import Dict, Any, Tuple, List
-import numpy as np
 from collections import Counter
 import logging
 import re
@@ -9,6 +8,7 @@ import networkx as nx
 import matplotlib.pyplot as plt
 import json
 import pkgutil
+import numpy as np
 
 logging.basicConfig(format='%(asctime)s - %(message)s',
                     datefmt='%d-%b-%y %H:%M:%S')
@@ -27,7 +27,14 @@ class RakunKeyphraseDetector:
         self.verbose = verbose
         self.tokens = None
         self.sorted_terms_tf = None
-        
+        self.document = None
+        self.full_tokens = None
+        self.bigram_counts = None
+        self.final_keywords = None
+        self.node_ranks = None
+        self.G = None
+        self.term_counts = None
+
         if self.verbose:
             logging.info("Initiated a keyword detector instance.")
 
@@ -108,6 +115,7 @@ class RakunKeyphraseDetector:
         plt.show()
 
     def compute_tf_scores(self, document: str = None) -> None:
+        """ Compute TF scores """
 
         if document is not None:
             self.tokens = self.pattern.findall(document)
@@ -121,6 +129,7 @@ class RakunKeyphraseDetector:
                                       reverse=True)
 
     def get_document_graph(self, weight: int = 1):
+        """ A method for obtaining the token graph """
 
         self.G = nx.DiGraph()
         num_tokens = len(self.tokens)
@@ -160,6 +169,7 @@ class RakunKeyphraseDetector:
         self.node_ranks = dict(zip(token_list, final_scores))
 
     def parse_input(self, document: str, input_type: str) -> None:
+        """ Input parsing method """
 
         if input_type == "file":
             with open(document, "r", encoding="utf-8") as doc:
@@ -171,7 +181,7 @@ class RakunKeyphraseDetector:
 
             elif type(document) == str:
                 full_document = document.split("\n")
-                
+
         else:
             raise NotImplementedError("Please select valid input type (file, string)")
 
@@ -206,6 +216,7 @@ class RakunKeyphraseDetector:
         self.final_keywords = sorted_keywords
 
     def merge_tokens(self) -> None:
+        """ Token merge method """
 
         two_grams = [(self.tokens[enx], self.tokens[enx + 1])
                      for enx in range(len(self.tokens) - 1)]
@@ -264,6 +275,7 @@ class RakunKeyphraseDetector:
         self.tokens = tmp_tokens
 
     def tokenize(self) -> None:
+        """ Core tokenization method """
 
         whitespace_count = self.document.count(" ")
         self.full_tokens = self.pattern.findall(self.document)

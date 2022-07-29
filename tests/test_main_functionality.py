@@ -1,5 +1,4 @@
 import pytest
-import numpy as np
 from rakun2 import RakunKeyphraseDetector
 
 example_document = """
