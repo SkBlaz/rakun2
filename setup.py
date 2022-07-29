@@ -6,7 +6,7 @@ from setuptools import setup, find_packages
 
 def parse_requirements(file):
     """ Generic requirement parser """
-    
+
     required_packages = []
     with open(path.join(path.dirname(__file__), file), encoding="utf-8") as req_file:
         for line in req_file:

@@ -178,7 +178,7 @@ class RakunKeyphraseDetector:
             if isinstance(document) == list:
                 return document
 
-            elif isinstance(document) == str:
+            if isinstance(document) == str:
                 full_document = document.split("\n")
 
             else:
