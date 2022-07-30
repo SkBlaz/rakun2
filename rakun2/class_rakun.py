@@ -175,10 +175,10 @@ class RakunKeyphraseDetector:
                 full_document = doc.read().split("\n")
 
         elif input_type == "string":
-            if isinstance(document) == list:
+            if isinstance(document, list):
                 return document
 
-            if isinstance(document) == str:
+            if isinstance(document, str):
                 full_document = document.split("\n")
 
             else:
