@@ -160,9 +160,9 @@ class RakunKeyphraseDetector:
             self.node_ranks = [[k, 1.0] for k in self.main_graph.nodes()]
 
         token_list = [k for k, v in self.node_ranks]
-        rank_distribution = np.array([y for x, y in self.node_ranks])
+        rank_distribution = np.array([y for _, y in self.node_ranks])
         token_length_distribution = np.array(
-            [len(x) for x, y in self.node_ranks])
+            [len(x) for x, _ in self.node_ranks])
 
         final_scores = rank_distribution * token_length_distribution
         self.node_ranks = dict(zip(token_list, final_scores))
