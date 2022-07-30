@@ -204,7 +204,7 @@ A key concept from the science of economics is "utility", a measure of how valua
 """
 
 
-@pytest.mark.parametrize("threshold", [0.0, 0.5, 0.8, 1, 2, 5])
+@pytest.mark.parametrize("threshold", [0.0, 0.5, 0.8, 1, 2, 5, 10])
 @pytest.mark.parametrize("alpha", [0.2, 0.5, 0.85, 1.0])
 @pytest.mark.parametrize("prune_len", [1, 2, 3, 4, 5])
 @pytest.mark.parametrize("num_keywords_inp", [5, 10, 25, 50, 100])
