@@ -2,6 +2,7 @@
 
 from typing import Dict, Any, Tuple, List
 from collections import Counter
+import gzip
 from operator import itemgetter
 import json
 import pkgutil
@@ -11,8 +12,8 @@ import networkx as nx
 import matplotlib.pyplot as plt
 import numpy as np
 
-logging.basicConfig(format='%(asctime)s - %(message)s',
-                    datefmt='%d-%b-%y %H:%M:%S')
+logging.basicConfig(format="%(asctime)s - %(message)s",
+                    datefmt="%d-%b-%y %H:%M:%S")
 logging.getLogger(__name__).setLevel(logging.INFO)
 
 
@@ -58,22 +59,25 @@ class RakunKeyphraseDetector:
             self.hyperparameters["merge_threshold"] = 0.5
 
         if "deduplication" not in self.hyperparameters:
-            self.hyperparameters['deduplication'] = True
+            self.hyperparameters["deduplication"] = True
 
         if "stopwords" not in self.hyperparameters:
 
             # A collection of stopwords as default
-            stopwords = pkgutil.get_data(__name__, 'stopwords.json')
+            stopwords = pkgutil.get_data(__name__, "stopwords.json.gz")
+            stopwords = gzip.decompress(stopwords)
             stopwords_generic = set(json.loads(stopwords.decode()))
             self.hyperparameters["stopwords"] = stopwords_generic
 
-    def visualize_network(self,
-                          labels: bool = False,
-                          node_size: float = 0.1,
-                          alpha: float = 0.01,
-                          link_width: float = 0.01,
-                          font_size: int = 3,
-                          arrowsize: int = 1):
+    def visualize_network(
+        self,
+        labels: bool = False,
+        node_size: float = 0.1,
+        alpha: float = 0.01,
+        link_width: float = 0.01,
+        font_size: int = 3,
+        arrowsize: int = 1,
+    ):
         """
         A method aimed to visualize a given token network.
         """
@@ -96,11 +100,13 @@ class RakunKeyphraseDetector:
                 final_colors.append("gray")
                 final_sizes.append(node_size)
 
-        nx.draw_networkx_nodes(self.main_graph,
-                               pos,
-                               node_size=final_sizes,
-                               node_color=final_colors,
-                               alpha=alpha)
+        nx.draw_networkx_nodes(
+            self.main_graph,
+            pos,
+            node_size=final_sizes,
+            node_color=final_colors,
+            alpha=alpha,
+        )
         nx.draw_networkx_edges(self.main_graph,
                                pos,
                                width=link_width,
@@ -141,7 +147,7 @@ class RakunKeyphraseDetector:
                 node_v = self.tokens[i + 1].lower()
 
                 if self.main_graph.has_edge(node_u, node_v):
-                    self.main_graph[node_u][node_v]['weight'] += weight
+                    self.main_graph[node_u][node_v]["weight"] += weight
 
                 else:
                     self.main_graph.add_edge(node_u, node_v, weight=weight)
@@ -149,11 +155,13 @@ class RakunKeyphraseDetector:
         self.main_graph.remove_edges_from(nx.selfloop_edges(self.main_graph))
         personalization = {a: self.term_counts[a] for a in self.tokens}
 
-        if len(self.main_graph) > self.hyperparameters['num_keywords']:
-            self.node_ranks = \
-                nx.pagerank(self.main_graph, alpha=self.hyperparameters["alpha"],
-                            max_iter=self.hyperparameters["max_iter"],
-                            personalization=personalization).items()
+        if len(self.main_graph) > self.hyperparameters["num_keywords"]:
+            self.node_ranks = nx.pagerank(
+                self.main_graph,
+                alpha=self.hyperparameters["alpha"],
+                max_iter=self.hyperparameters["max_iter"],
+                personalization=personalization,
+            ).items()
 
             self.node_ranks = [[k, v] for k, v in self.node_ranks]
         else:
@@ -183,10 +191,12 @@ class RakunKeyphraseDetector:
                 full_document = document.split("\n")
 
             else:
-                raise NotImplementedError("Input type not recognized (str, list)")
+                raise NotImplementedError(
+                    "Input type not recognized (str, list)")
 
         else:
-            raise NotImplementedError("Please select valid input type (file, string)")
+            raise NotImplementedError(
+                "Please select valid input type (file, string)")
 
         return full_document
 
@@ -202,8 +212,8 @@ class RakunKeyphraseDetector:
 
         for ranked_node, score in self.node_ranks.items():
 
-            if ranked_node.lower() in self.hyperparameters['stopwords'] \
-               or len(ranked_node) <= 2:
+            if (ranked_node.lower() in self.hyperparameters["stopwords"]
+                    or len(ranked_node) <= 2):
                 continue
 
             if ranked_node not in appeared_tokens:
@@ -237,13 +247,13 @@ class RakunKeyphraseDetector:
             bgs = np.abs(count1 - bgc) + np.abs(count2 - bgc)
             bgs = bgs / (count1 + count2)
 
-            if token1 not in self.hyperparameters['stopwords'] and \
-               token2 not in self.hyperparameters['stopwords']:
+            if (token1 not in self.hyperparameters["stopwords"]
+                    and token2 not in self.hyperparameters["stopwords"]):
 
-                if bgs < self.hyperparameters['merge_threshold']:
-                    if len(token2) > \
-                       self.hyperparameters['token_prune_len'] and \
-                       len(token1) > self.hyperparameters['token_prune_len']:
+                if bgs < self.hyperparameters["merge_threshold"]:
+                    if (len(token2) > self.hyperparameters["token_prune_len"]
+                            and len(token1) >
+                            self.hyperparameters["token_prune_len"]):
 
                         to_add = token1 + " " + token2
                         tmp_tokens.append(to_add)
@@ -253,10 +263,10 @@ class RakunKeyphraseDetector:
 
                         self.term_counts[to_add] = bgc
                         self.term_counts[token1] *= self.hyperparameters[
-                            'merge_threshold']
+                            "merge_threshold"]
 
                         self.term_counts[token2] *= self.hyperparameters[
-                            'merge_threshold']
+                            "merge_threshold"]
                 else:
                     continue
 
@@ -265,7 +275,7 @@ class RakunKeyphraseDetector:
                 tmp_tokens.append(token2)
 
         # remove duplicate entries
-        if self.hyperparameters['deduplication']:
+        if self.hyperparameters["deduplication"]:
             to_drop = []
 
             for token in tmp_tokens:
@@ -291,13 +301,14 @@ class RakunKeyphraseDetector:
 
         if space_factor < 0.5:
 
-            self.tokens = [x for x in list(self.document.strip()) if
-                           not x == " "
-                           and not x == "\n"
-                           and not x == "，"]
+            self.tokens = [
+                x for x in list(self.document.strip())
+                if not x == " " and not x == "\n" and not x == "，"
+            ]
 
-            self.tokens = [x for x in self.tokens if not x.isdigit()
-                           and " " not in x]
+            self.tokens = [
+                x for x in self.tokens if not x.isdigit() and " " not in x
+            ]
 
         else:
             self.tokens = [x for x in self.full_tokens if not x.isdigit()]
@@ -318,4 +329,4 @@ class RakunKeyphraseDetector:
         self.merge_tokens()
         self.get_document_graph()
         self.combine_keywords()
-        return self.final_keywords[:self.hyperparameters['num_keywords']]
+        return self.final_keywords[:self.hyperparameters["num_keywords"]]
