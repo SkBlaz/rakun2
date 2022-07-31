@@ -226,3 +226,22 @@ def test_retrieved_keyphrases_num(num_keywords_inp, threshold, alpha,
                                                   input_type="string")
     assert len(out_keywords) == num_keywords_inp
     assert len([x for x in out_keywords if not x]) == 0
+
+
+@pytest.mark.parametrize("num_keywords_inp", [10, 25, 50, 100])
+def test_retrieved_keyphrases_quality(num_keywords_inp):
+    hyperparameters = {
+        "num_keywords": num_keywords_inp,
+        "merge_threshold": 1.1,
+        "alpha": 0.8,
+        "token_prune_len": 3
+    }
+
+    keyword_detector = RakunKeyphraseDetector(hyperparameters)
+    out_keywords = keyword_detector.find_keywords(example_document,
+                                                  input_type="string")
+
+    keywords = set(x[0] for x in out_keywords)
+    assert "artificial intelligence" in keywords
+    assert "mathematical optimization" in keywords
+    assert "language processing" in keywords

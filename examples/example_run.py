@@ -212,4 +212,4 @@ keyword_detector = RakunKeyphraseDetector(hyperparameters)
 out_keywords = keyword_detector.find_keywords(EXAMPLE_DOCUMENT, input_type="string")
 print(out_keywords)
 
-keyword_detector.visualize_network()
+#keyword_detector.visualize_network()
