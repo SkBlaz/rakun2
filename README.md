@@ -1,7 +1,7 @@
 # RaKUn 2.0
 This is the repository containing the implementation of RaKUn 2.0, a very fast keyphrase extraction algorithm suitable for large-scale keyphrase detection.
 
-![Image](./examples/imageR.jpg "Landing")
+![Image](./examples/imageR.png "https://freesvg.org/raccoon-face-logo")
 
 [![Pylint](https://github.com/SkBlaz/rakun2/actions/workflows/unit-tests.yml/badge.svg)](https://github.com/SkBlaz/rakun2/actions/workflows/unit-tests.yml)[![Unit tests](https://github.com/SkBlaz/rakun2/actions/workflows/pylint.yml/badge.svg)](https://github.com/SkBlaz/rakun2/actions/workflows/pylint.yml)
 
