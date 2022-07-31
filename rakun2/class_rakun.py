@@ -33,8 +33,8 @@ class RakunKeyphraseDetector:
         self.full_tokens = None
         self.bigram_counts = None
         self.final_keywords = None
-        self.node_ranks = None
-        self.main_graph = None
+        self.node_ranks = {}
+        self.main_graph = nx.Graph()
         self.term_counts = None
         self.space_factor = 0.5
 
@@ -128,7 +128,7 @@ class RakunKeyphraseDetector:
         if document is not None:
             self.tokens = self.pattern.findall(document)
 
-        term_counter = Counter()
+        term_counter: Any = Counter()
         for term in self.tokens:
             term_counter.update({term: 1})
         self.term_counts = dict(term_counter)
@@ -277,13 +277,12 @@ class RakunKeyphraseDetector:
 
         # remove duplicate entries
         if self.hyperparameters["deduplication"]:
-            to_drop = []
+            to_drop = set()
 
             for token in tmp_tokens:
                 if token in merged:
-                    to_drop.append(token)
+                    to_drop.add(token)
 
-            to_drop = set(to_drop)
             tmp_tokens = [x for x in tmp_tokens if x not in to_drop]
 
         self.tokens = tmp_tokens
