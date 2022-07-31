@@ -36,6 +36,7 @@ class RakunKeyphraseDetector:
         self.node_ranks = None
         self.main_graph = None
         self.term_counts = None
+        self.space_factor = 0.5
 
         if self.verbose:
             logging.info("Initiated a keyword detector instance.")
@@ -299,7 +300,7 @@ class RakunKeyphraseDetector:
         else:
             space_factor = 0
 
-        if space_factor < 0.5:
+        if space_factor < self.space_factor:
 
             self.tokens = [
                 x for x in list(self.document.strip())
