@@ -2,6 +2,7 @@
 
 from typing import Dict, Any, Tuple, List
 from collections import Counter
+from operator import itemgetter
 import json
 import pkgutil
 import logging
@@ -125,7 +126,7 @@ class RakunKeyphraseDetector:
             term_counter.update({term: 1})
         self.term_counts = dict(term_counter)
         self.sorted_terms_tf = sorted(term_counter.items(),
-                                      key=lambda x: x[1],
+                                      key=itemgetter(1),
                                       reverse=True)
 
     def get_document_graph(self, weight: int = 1):
@@ -212,7 +213,7 @@ class RakunKeyphraseDetector:
             appeared_tokens[ranked_node] = 1
 
         sorted_keywords = sorted(combined_keywords,
-                                 key=lambda x: x[1],
+                                 key=itemgetter(1),
                                  reverse=True)
 
         self.final_keywords = sorted_keywords
