@@ -5,6 +5,8 @@ This is the repository containing the implementation of RaKUn 2.0, a very fast k
 
 [![Pylint](https://github.com/SkBlaz/rakun2/actions/workflows/unit-tests.yml/badge.svg)](https://github.com/SkBlaz/rakun2/actions/workflows/unit-tests.yml)[![Unit tests](https://github.com/SkBlaz/rakun2/actions/workflows/pylint.yml/badge.svg)](https://github.com/SkBlaz/rakun2/actions/workflows/pylint.yml)
 
+[![Unit tests - pip package](https://github.com/SkBlaz/rakun2/actions/workflows/python-pip-unit.yml/badge.svg)](https://github.com/SkBlaz/rakun2/actions/workflows/python-pip-unit.yml)
+
 # Installation and setup
 The tool is distributed as a simple-to-use Python library. Simply
 
