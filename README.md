@@ -1,5 +1,5 @@
 # RaKUn 2.0
-This is the repository containing the implementation of RaKUn 2.0, a very fast keyphrase extraction algorithm suitable for large-scale keyphrase detection.
+This is the repository containing the implementation of RaKUn 2.0, a very fast keyphrase extraction algorithm suitable for large-scale keyphrase retrieval.
 
 ![Image](./examples/imageR.png "https://freesvg.org/raccoon-face-logo")
 
