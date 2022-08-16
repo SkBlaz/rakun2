@@ -72,5 +72,23 @@ bash generate.sh
 From `containers` folder. The command will build a `rakun2.sif` image, you can use as any other Singularity container (`singularity exec rakun2.sif python {YourFileThatCallsTheLib}`. Further, `conda` users have `environment.yml` available, as well as `requirements.txt` (`pip install -r requirements.txt; pip install . --upgrade` for local install).
 
 # Citing this work
+'''
+@misc{https://doi.org/10.48550/arxiv.2208.07262,
+  doi = {10.48550/ARXIV.2208.07262},
+  
+  url = {https://arxiv.org/abs/2208.07262},
+  
+  author = {Škrlj, Blaž and Koloski, Boshko and Pollak, Senja},
+  
+  keywords = {Information Retrieval (cs.IR), FOS: Computer and information sciences, FOS: Computer and information sciences},
+  
+  title = {Retrieval-efficiency trade-off of Unsupervised Keyword Extraction},
+  
+  publisher = {arXiv},
+  
+  year = {2022},
+  
+  copyright = {Creative Commons Attribution 4.0 International}
+}
 
-TBA
+'''
