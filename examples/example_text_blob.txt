@@ -1,0 +1,613 @@
+Marsupial
+From Wikipedia, the free encyclopedia
+Jump to navigation
+Jump to search
+This article is about the mammals. For frogs, see Marsupial frog.
+Marsupials
+Temporal range: Paleocene–Recent
+PreꞒ
+Ꞓ
+O
+S
+D
+C
+P
+T
+J
+K
+Pg
+N
+Possible Late Cretaceous records
+Marsupialia.jpg
+Clockwise from left: eastern grey kangaroo, Virginia opossum, long-nosed bandicoot, Monito del monte and Tasmanian devil representing the orders Diprotodontia, Didelphimorphia, Peramelemorphia, Microbiotheria and Dasyuromorphia respectively
+Scientific classification e
+Kingdom: 	Animalia
+Phylum: 	Chordata
+Class: 	Mammalia
+Clade: 	Marsupialiformes
+Infraclass: 	Marsupialia
+Illiger, 1811
+Orders
+
+    Didelphimorphia
+    Paucituberculata
+    Australidelphia
+        Microbiotheria
+        Dasyuromorphia
+        Peramelemorphia
+        Notoryctemorphia
+        Diprotodontia
+        †Yalkaparidontia
+        †Polydolopimorphia?
+
+Marsupial biogeography present day - dymaxion map.png
+Present-day distribution of marsupials (blue; excludes introduced presence in New Zealand)
+
+Marsupials are any members of the mammalian infraclass Marsupialia. All extant marsupials are endemic to Australasia, Wallacea and the Americas. A distinctive characteristic common to most of these species is that the young are carried in a pouch. Marsupials include opossums, Tasmanian devils, kangaroos, koalas, wombats, wallabies, bandicoots, and the extinct thylacine.
+
+Marsupials represent the clade originating from the last common ancestor of extant metatherians, the group containing all mammals more closely related to marsupials than to placentals. They give birth to relatively undeveloped young that often reside in a pouch located on their mothers' abdomen for a certain amount of time. Close to 70% of the 334 extant species occur on the Australian continent (the mainland, Tasmania, New Guinea and nearby islands). The remaining 30% are found in the Americas—primarily in South America, thirteen in Central America, and one species, the Virginia opossum, in North America, north of Mexico.
+
+The word marsupial comes from marsupium, the technical term for the abdominal pouch. It, in turn, is borrowed from Latin and ultimately from the ancient Greek μάρσιππος mársippos, meaning "pouch".
+Contents
+
+    1 Taxonomy
+        1.1 Classification
+        1.2 Phylogenetic relationships
+    2 Anatomy
+        2.1 Skull and teeth
+        2.2 Torso
+        2.3 General and convergences
+        2.4 Body temperature
+        2.5 Reproductive system
+    3 Geography
+    4 Interaction with Europeans
+    5 Evolutionary history
+    6 See also
+    7 Notes
+    8 References
+    9 Further reading
+    10 External links
+
+Taxonomy
+
+Marsupials are taxonomically identified as members of mammalian infraclass Marsupialia, first described as a family under the order Pollicata by German zoologist Johann Karl Wilhelm Illiger in his 1811 work Prodromus Systematis Mammalium et Avium. However, James Rennie, author of The Natural History of Monkeys, Opossums and Lemurs (1838), pointed out that the placement of five different groups of mammals – monkeys, lemurs, tarsiers, aye-ayes and marsupials (with the exception of kangaroos, that were placed under the order Salientia) – under a single order (Pollicata) did not appear to have a strong justification. In 1816, French zoologist George Cuvier classified all marsupials under the order Marsupialia.[1][2] In 1997, researcher J. A. W. Kirsch and others accorded infraclass rank to Marsupialia.[2] There are two primary divisions: American marsupials (Ameridelphia) and Australian marsupials (Australidelphia) of which one, the monito del monte, is actually native to South America.[3]
+Classification
+
+Marsupialia is further divided as follows:[3]
+
+† – Extinct
+
+    Superorder Ameridelphia
+        Order Didelphimorphia (127 species)
+            Family Didelphidae: opossums
+        Order Paucituberculata (seven species)
+            Family Caenolestidae: shrew opossums
+    Superorder Australidelphia
+        Order Microbiotheria (three species)
+            Family Microbiotheriidae: monitos del monte
+        Order †Yalkaparidontia (incertae sedis)
+        Order Dasyuromorphia (75 species)
+            Family †Thylacinidae: thylacine
+            Family Dasyuridae: antechinuses, quolls, dunnarts, Tasmanian devil, and relatives
+            Family Myrmecobiidae: numbat
+        Order Notoryctemorphia (two species)
+            Family Notoryctidae: marsupial moles
+        Order Peramelemorphia (24 species)
+            Family Thylacomyidae: bilbies
+            Family †Chaeropodidae: pig-footed bandicoots
+            Family Peramelidae: bandicoots and allies
+        Order Diprotodontia (137 species)
+            Suborder Vombatiformes
+                Family Vombatidae: wombats
+                Family Phascolarctidae: koalas
+                Family † Diprotodontidae: giant wombats
+                Family † Palorchestidae: marsupial tapirs
+                Family † Thylacoleonidae: marsupial lions
+            Suborder Phalangeriformes
+                Family Acrobatidae: feathertail glider and feather-tailed possum
+                Family Burramyidae: pygmy possums
+                Family †Ektopodontidae: sprite possums
+                Family Petauridae: striped possum, Leadbeater's possum, yellow-bellied glider, sugar glider, mahogany glider, squirrel glider
+                Family Phalangeridae: brushtail possums and cuscuses
+                Family Pseudocheiridae: ringtailed possums and relatives
+                Family Tarsipedidae: honey possum
+            Suborder Macropodiformes
+                Family Macropodidae: kangaroos, wallabies, and relatives
+                Family Potoroidae: potoroos, rat kangaroos, bettongs
+                Family Hypsiprymnodontidae: musky rat-kangaroo
+                Family † Balbaridae: basal quadrupedal kangaroos
+
+Phylogenetic relationships
+
+Comprising over 300 extant species, several attempts have been made to accurately interpret the phylogenetic relationships among the different marsupial orders. Studies differ on whether Didelphimorphia or Paucituberculata is the sister group to all other marsupials.[4] Though the order Microbiotheria (which has only one species, the monito del monte) is found in South America, morphological similarities suggest it is closely related to Australian marsupials.[5] Molecular analyses in 2010 and 2011 identified Microbiotheria as the sister group to all Australian marsupials. However, the relations among the four Australidelphid orders are not as well understood. The cladogram below, depicting the relationships among the various marsupial orders, is based on a 2015 phylogenetic study.[4]
+Marsupialia 	
+  	
+
+DidelphimorphiaA hand-book to the marsupialia and monotremata (Plate XXXII) (white background).jpg
+ 
+  	
+  	
+
+PaucituberculataPhylogenetic tree of marsupials derived from retroposon data (Paucituberculata).png
+ 
+Australidelphia 	
+  	
+
+Microbiotheria
+ 
+  	
+  	
+
+DiprotodontiaA monograph of the Macropodidæ, or family of kangaroos (9398404841) white background.jpg
+ 
+  	
+  	
+
+NotoryctemorphiaPhylogenetic tree of marsupials derived from retroposon data (Notoryctemorphia).png
+ 
+  	
+  	
+
+DasyuromorphiaPhylogenetic tree of marsupials derived from retroposon data (Dasyuromorphia).png 
+ 
+  	
+
+PeramelemorphiaPhylogenetic tree of marsupials derived from retroposon data (Paramelemorphia).png
+ 
+ 
+ 
+ 
+ 
+ 
+	New World marsupials
+
+
+
+
+
+
+
+
+
+
+
+
+
+Australasian marsupials
+ 
+
+DNA evidence supports a South American origin for marsupials, with Australian marsupials arising from a single Gondwanan migration of marsupials from South America, across Antarctica, to Australia.[6][7] There are many small arboreal species in each group. The term "opossum" is used to refer to American species (though "possum" is a common abbreviation), while similar Australian species are properly called "possums".
+Anatomy
+Koala
+(Phascolarctos cinereus)
+
+Marsupials have the typical characteristics of mammals—e.g., mammary glands, three middle ear bones, and true hair. There are, however, striking differences as well as a number of anatomical features that separate them from eutherians.
+
+In addition to the front pouch, which contains multiple teats for the sustenance of their young, marsupials have other common structural features. Ossified patellae are absent in most modern marsupials (though a small number of exceptions are reported)[8] and epipubic bones are present. Marsupials (and monotremes) also lack a gross communication (corpus callosum) between the right and left brain hemispheres.[9]
+Skull and teeth
+
+The skull has peculiarities in comparison to placental mammals. In general, the skull is relatively small and tight. Holes (foramen lacrimale) are located in the front of the orbit. The cheekbone is enlarged and extends farther to the rear. The angular extension (processus angularis) of the lower jaw is bent toward the center. Another feature is the hard palate which, in contrast to the placental mammals' foramina, always have more openings. The teeth differ from that of placental mammals, so that all taxa except wombats have a different number of incisors in the upper and lower jaws. The early marsupials had a dental formula from 5.1.3.44.1.3.4, that is, per quadrant; they have five (maxillary) or four (mandibular) incisors, one canine, three premolars and four molars, for a total of 50 teeth. Some taxa, such as the opossum, have the original number of teeth. In other groups the number of teeth is reduced. The dental formula for Macropodidae (kangaroos and wallabies etc.) is 3/1 – (0 or 1)/0 – 2/2 – 4/4. Marsupials in many cases have 40 to 50 teeth, significantly more than placental mammals. The second set of teeth grows in only at the 3rd premolar site and back; all teeth more anterior to that erupt initially as permanent teeth.
+Torso
+
+Few general characteristics describe their skeleton. In addition to unique details in the construction of the ankle, epipubic bones (ossa epubica) are observed projecting forward from the pubic bone of the pelvis. Since these are present in males and pouchless species, it is believed that they originally had nothing to do with reproduction, but served in the muscular approach to the movement of the hind limbs. This could be explained by an original feature of mammals, as these epipubic bones are also found in monotremes. Marsupial reproductive organs differ from the placental mammals. For them, the reproductive tract is doubled. The females have two uteri and two vaginas, and before birth, a birth canal forms between them, the median vagina.[9] The males have a split or double penis lying in front of the scrotum.[10]
+
+A pouch is present in most, but not all, species. Many marsupials have a permanent bag, whereas in others the pouch develops during gestation, as with the shrew opossum, where the young are hidden only by skin folds or in the fur of the mother. The arrangement of the pouch is variable to allow the offspring to receive maximum protection. Locomotive kangaroos have a pouch opening at the front, while many others that walk or climb on all fours have the opening in the back. Usually, only females have a pouch, but the male water opossum has a pouch that is used to accommodate his genitalia while swimming or running.
+General and convergences
+The sugar glider, a marsupial, (left) and flying squirrel, a rodent, (right) are examples of convergent evolution.
+
+Marsupials have adapted to many habitats, reflected in the wide variety in their build. The largest living marsupial, the red kangaroo, grows up to 1.8 metres (5 ft 11 in) in height and 90 kilograms (200 lb) in weight, but extinct genera, such as Diprotodon, were significantly larger and heavier. The smallest members of this group are the marsupial mice, which often reach only 5 centimetres (2.0 in) in body length.
+
+Some species resemble placental mammals and are examples of convergent evolution. This convergence is evident in both brain evolution[11] and behaviour.[12] The extinct Thylacine strongly resembled the placental wolf, hence one of its nicknames "Tasmanian wolf". The ability to glide evolved in both marsupials (as with sugar gliders) and some placental mammals (as with flying squirrels), which developed independently. Other groups such as the kangaroo, however, do not have clear placental counterparts, though they share similarities in lifestyle and ecological niches with ruminants.
+Body temperature
+
+Marsupials, along with monotremes (platypuses and echidnas), typically have lower body temperatures than similarly-sized placental mammals (eutherians).[13]
+Reproductive system
+See also: Kangaroo § Reproduction and life cycle
+Female eastern grey kangaroo with a joey in her pouch
+
+Marsupials' reproductive systems differ markedly from those of placental mammals.[14][15] During embryonic development, a choriovitelline placenta forms in all marsupials. In bandicoots, an additional chorioallantoic placenta forms, although it lacks the chorionic villi found in eutherian placentas.
+
+The evolution of reproduction in marsupials, and speculation about the ancestral state of mammalian reproduction, have engaged discussion since the end of the 19th century. Both sexes possess a cloaca,[15] which is connected to a urogenital sac used to store waste before expulsion. The bladder of marsupials functions as a site to concentrate urine and empties into the common urogenital sinus in both females and males.[15]
+
+Male reproductive system
+Reproductive tract of a male macropod
+
+Most male marsupials, except for macropods[16] and marsupial moles,[17] have a bifurcated penis, separated into two columns, so that the penis has two ends corresponding to the females' two vaginas.[9][15][18][19][10][20][21] The penis is used only during copulation, and is separate from the urinary tract.[10][15] It curves forward when erect,[22] and when not erect, it is retracted into the body in an S-shaped curve.[10] Neither marsupials nor monotremes possess a baculum.[9] The shape of the glans penis varies among marsupial species.[10][23][24][25]
+
+The male thylacine had a pouch that acts as a protective sheath, covering his external reproductive organs while running through thick brush.[26]
+
+The shape of the urethral grooves of the males' genitalia is used to distinguish between Monodelphis brevicaudata, Monodelphis domestica, and Monodelphis americana. The grooves form 2 separate channels that form the ventral and dorsal folds of the erectile tissue.[27] Several species of dasyurid marsupials can also be distinguished by their penis morphology.[28] The only accessory sex glands marsupials possess are the prostate and bulbourethral glands.[29] Male marsupials have 1-3 pairs of bulbourethral glands.[30] There are no ampullae, seminal vesicles or coagulating glands.[31][18] The prostate is proportionally larger in marsupials than in placental mammals.[10] During the breeding season, the male tammar wallaby's prostate and bulbourethral gland enlarge. However, there does not appear to be any seasonal difference in the weight of the testes.[32]
+Female reproductive system
+See also: Birth § Marsupials
+Female reproductive anatomy of several marsupial species
+
+Female marsupials have two lateral vaginas, which lead to separate uteri, but both open externally through the same orifice. A third canal, the median vagina, is used for birth. This canal can be transitory or permanent.[9] Some marsupial species are able to store sperm in the oviduct after mating.[33]
+
+Marsupials give birth at a very early stage of development; after birth, newborn marsupials crawl up the bodies of their mothers and attach themselves to a teat, which is located on the underside of the mother, either inside a pouch called the marsupium, or open to the environment. Mothers often lick their fur to leave a trail of scent for the newborn to follow to increase chances of making it into the marsupium. There they remain for a number of weeks, attached to the teat. The offspring are eventually able to leave the marsupium for short periods, returning to it for warmth, protection, and nourishment.
+Early development
+	
+This section may contain content that is repetitive or redundant of text elsewhere in the article. Please help improve it by merging similar text or removing repeated statements. (November 2017)
+Child holding rescued agile wallaby joey. Cooktown. 2008
+
+Prenatal development differs between marsupials and placental mammals. Key aspects of the first stages of placental mammal embryo development, such as the inner cell mass and the process of compaction, are not found in marsupials.[34] The cleavage stages of marsupial development are very variable between groups and aspects of marsupial early development are not yet fully understood.
+
+An early birth removes a developing marsupial from its mother's body much sooner than in placental mammals; thus marsupials have not developed a complex placenta to protect the embryo from its mother's immune system. Though early birth puts the tiny newborn marsupial at a greater environmental risk, it significantly reduces the dangers associated with long pregnancies, as there is no need to carry a large fetus to full term in bad seasons. Marsupials are extremely altricial animals, needing to be intensely cared for immediately following birth (cf. precocial).
+
+Because newborn marsupials must climb up to their mother's teats, their front limbs and facial structures are much more developed than the rest of their bodies at the time of birth.[35][36] This requirement has been argued to have resulted in the limited range of locomotor adaptations in marsupials compared to placentals. Marsupials must develop grasping forepaws during their early youth, making the evolutive transition from these limbs into hooves, wings, or flippers, as some groups of placental mammals have done, more difficult. However, several marsupials do possess atypical forelimb morphologies, such as the hooved forelimbs of the pig-footed bandicoot, suggesting that the range of forelimb specialization is not as limited as assumed.[37]
+
+An infant marsupial is known as a joey. Marsupials have a very short gestation period—usually around four to five weeks, but as low as 12 days for some species—and the joey is born in an essentially fetal state. The blind, furless, miniature newborn, the size of a jelly bean,[38][failed verification] crawls across its mother's fur to make its way into the pouch, where it latches onto a teat for food. It will not re-emerge for several months, during which time it develops fully. After this period, the joey begins to spend increasing lengths of time out of the pouch, feeding and learning survival skills. However, it returns to the pouch to sleep, and if danger threatens, it will seek refuge in its mother's pouch for safety.
+
+Joeys stay in the pouch for up to a year in some species, or until the next joey is born. A marsupial joey is unable to regulate its own body temperature and relies upon an external heat source. Until the joey is well furred and old enough to leave the pouch, a pouch temperature of 30–32 °C (86–90 °F) must be constantly maintained.
+
+Joeys are born with "oral shields". In species without pouches or with rudimentary pouches these are more developed than in forms with well-developed pouches, implying a role in maintaining the young attached to the mother's teat.[39]
+Geography
+
+In Australasia, marsupials are found in Australia, Tasmania and New Guinea; throughout the Maluku Islands, Timor and Sulawesi to the west of New Guinea, and in the Bismarck Archipelago (including the Admiralty Islands) and Solomon Islands to the east of New Guinea.
+
+In America, marsupials are found throughout South America, excluding the central/southern Andes and parts of Patagonia; and through Central America and south-central Mexico, with a single species widespread in the eastern United States and along the Pacific coast.
+Interaction with Europeans
+
+The first American marsupial (and marsupial in general) that a European encountered was the common opossum. Vicente Yáñez Pinzón, commander of the Niña on Christopher Columbus' first voyage in the late fifteenth century, collected a female opossum with young in her pouch off the South American coast. He presented them to the Spanish monarchs, though by then the young were lost and the female had died. The animal was noted for its strange pouch or "second belly", and how the offspring reached the pouch was a mystery.[40][41]
+
+On the other hand, it was the Portuguese who first described Australasian marsupials. António Galvão, a Portuguese administrator in Ternate (1536–40), wrote a detailed account of the northern common cuscus (Phalanger orientalis):[40]
+
+    Some animals resemble ferrets, only a little bigger. They are called Kusus. They have a long tail with which they hang from the trees in which they live continuously, winding it once or twice around a branch. On their belly they have a pocket like an intermediate balcony; as soon as they give birth to a young one, they grow it inside there at a teat until it does not need nursing anymore. As soon as she has borne and nourished it, the mother becomes pregnant again.
+
+From the start of the 17th century more accounts of marsupials arrived. For instance, a 1606 record of an animal, killed on the southern coast of New Guinea, described it as "in the shape of a dog, smaller than a greyhound", with a snakelike "bare scaly tail" and hanging testicles. The meat tasted like venison, and the stomach contained ginger leaves. This description appears to closely resemble the dusky pademelon (Thylogale brunii), in which case this would be the earliest European record of a member of the kangaroo family (Macropodidae).[42][40]
+Evolutionary history
+See also: Metatheria, Evolution of Macropodidae, and Evolution of mammals
+Isolated petrosals of Djarthia murgonensis, Australia's oldest marsupial fossils[43]
+Dentition of the herbivorous eastern grey kangaroo, as illustrated in Knight's Sketches in Natural History
+
+The relationships among the three extant divisions of mammals (monotremes, marsupials, and placentals) were long a matter of debate among taxonomists.[44] Most morphological evidence comparing traits such as number and arrangement of teeth and structure of the reproductive and waste elimination systems as well as most genetic and molecular evidence favors a closer evolutionary relationship between the marsupials and placental mammals than either has with the monotremes.[45]
+Phylogenetic tree of marsupials derived from retroposon data[7]
+
+The ancestors of marsupials, part of a larger group called metatherians, probably split from those of placental mammals (eutherians) during the mid-Jurassic period, though no fossil evidence of metatherians themselves are known from this time.[46] From DNA and protein analyses, the time of divergence of the two lineages has been estimated to be around 100 to 120 mya.[40] Fossil metatherians are distinguished from eutherians by the form of their teeth; metatherians possess four pairs of molar teeth in each jaw, whereas eutherian mammals (including true placentals) never have more than three pairs.[47] Using this criterion, the earliest known metatherian was thought to be Sinodelphys szalayi, which lived in China around 125 mya.[48][49][50] However Sinodelphys was later reinterpreted as an early member of Eutheria. The unequivocal oldest known metatherians are now 110 million years old fossils from western North America.[51] Metatherians were widespread in North America and Asia during the Late Cretaceous, but suffered a severe decline during the end-Cretaceous extinction event.[52]
+
+Marsupials spread to South America from North America during the Paleocene, possibly via the Aves Ridge.[53][54][55] Northern Hemisphere metatherians, which were of low morphological and species diversity compared to contemporary placental mammals, eventually became extinct during the Miocene epoch.[56]
+
+Cladogram from Wilson et al. (2016)[57]
+Metatheria 	
+  	
+
+Holoclemensia
+ 
+  	
+  	
+  	
+
+Pappotherium
+ 
+  	
+  	
+
+Sulestes
+ 
+  	
+
+Oklatheridium
+ 
+  	
+  	
+
+Tsagandelta
+ 
+  	
+  	
+
+Lotheridium
+ 
+  	
+  	
+
+Deltatheroides
+ 
+  	
+
+Deltatheridium
+ 
+  	
+  	
+
+Nanocuris
+ 
+  	
+
+Atokatheridium
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Marsupialiformes 	
+  	
+  	
+
+Gurlin Tsav skull
+ 
+  	
+  	
+
+Borhyaenidae
+ 
+  	
+  	
+
+Mayulestes
+ 
+  	
+  	
+
+Jaskhadelphys
+ 
+  	
+  	
+
+Andinodelphys
+ 
+  	
+
+Pucadelphys
+ 
+ 
+ 
+ 
+ 
+ 
+  	
+  	
+
+Asiatherium
+ 
+  	
+  	
+  	
+
+Iugomortiferum
+ 
+  	
+
+Kokopellia
+ 
+ 
+  	
+
+Aenigmadelphys
+ 
+  	
+
+Anchistodelphys
+ 
+  	
+Glasbiidae 	
+
+Glasbius
+ 
+Pediomyidae 	
+
+Pediomys
+ 
+ 
+Stagodontidae 	
+  	
+
+Pariadens
+ 
+  	
+  	
+
+Eodelphis
+ 
+  	
+
+Didelphodon
+ 
+ 
+ 
+Alphadontidae 	
+  	
+
+Turgidodon
+ 
+  	
+
+Alphadon
+ 
+  	
+
+Albertatherium
+ 
+ 
+  	
+
+Marsupialia
+ 
+ 
+ 
+ 
+ 
+ 
+
+In South America, the opossums evolved and developed a strong presence, and the Paleogene also saw the evolution of shrew opossums (Paucituberculata) alongside non-marsupial metatherian predators such as the borhyaenids and the saber-toothed Thylacosmilus. South American niches for mammalian carnivores were dominated by these marsupial and sparassodont metatherians, which seem to have competitively excluded South American placentals from evolving carnivory.[58] While placental predators were absent, the metatherians did have to contend with avian (terror bird) and terrestrial crocodylomorph competition. Marsupials were excluded in turn from large herbivore niches in South America by the presence of native placental ungulates (now extinct) and xenarthrans (whose largest forms are also extinct). South America and Antarctica remained connected until 35 mya, as shown by the unique fossils found there. North and South America were disconnected until about three million years ago, when the Isthmus of Panama formed. This led to the Great American Interchange. Sparassodonts disappeared for unclear reasons – again, this has classically assumed as competition from carnivoran placentals, but the last sparassodonts co-existed with a few small carnivorans like procyonids and canines, and disappeared long before the arrival of macropredatory forms like felines,[59] while didelphimorphs (opossums) invaded Central America, with the Virginia opossum reaching as far north as Canada.
+
+Marsupials reached Australia via Antarctica during the Early Eocene, around 50 mya, shortly after Australia had split off.[n 1][n 2] This suggests a single dispersion event of just one species, most likely a relative to South America's monito del monte (a microbiothere, the only New World australidelphian). This progenitor may have rafted across the widening, but still narrow, gap between Australia and Antarctica. The journey must not have been easy; South American ungulate[63][64][65] and xenarthran[66] remains have been found in Antarctica, but these groups did not reach Australia.
+
+In Australia, marsupials radiated into the wide variety seen today, including not only omnivorous and carnivorous forms such as were present in South America, but also into large herbivores. Modern marsupials appear to have reached the islands of New Guinea and Sulawesi relatively recently via Australia.[67][68][69] A 2010 analysis of retroposon insertion sites in the nuclear DNA of a variety of marsupials has confirmed all living marsupials have South American ancestors. The branching sequence of marsupial orders indicated by the study puts Didelphimorphia in the most basal position, followed by Paucituberculata, then Microbiotheria, and ending with the radiation of Australian marsupials. This indicates that Australidelphia arose in South America, and reached Australia after Microbiotheria split off.[6][7]
+
+In Australia, terrestrial placental mammals disappeared early in the Cenozoic (their most recent known fossils being 55 million-year-old teeth resembling those of condylarths) for reasons that are not clear, allowing marsupials to dominate the Australian ecosystem.[67] Extant native Australian terrestrial placental mammals (such as hopping mice) are relatively recent immigrants, arriving via island hopping from Southeast Asia.[68]
+
+Genetic analysis suggests a divergence date between the marsupials and the placentals at 160 million years ago.[70] The ancestral number of chromosomes has been estimated to be 2n = 14.
+
+A new hypothesis suggests that South American microbiotheres resulted from a back-dispersal from eastern Gondwana due to new cranial and post-cranial marsupial fossils from the Djarthia murgonensis from the early Eocene Tingamarra Local Fauna in Australia that indicate the Djarthia murgonensis is the most plesiomorphic, the oldest unequivocal australidelphian, and may be the ancestral morphotype of the Australian marsupial radiation.[71]
+
+The kangaroo is a marsupial from the family Macropodidae (macropods, meaning "large foot"). In common use the term is used to describe the largest species from this family, the red kangaroo, as well as the antilopine kangaroo, eastern grey kangaroo, and western grey kangaroo.[1] Kangaroos are indigenous to Australia and New Guinea. The Australian government estimates that 42.8 million kangaroos lived within the commercial harvest areas of Australia in 2019, down from 53.2 million in 2013.[2]
+
+As with the terms "wallaroo" and "wallaby", "kangaroo" refers to a paraphyletic grouping of species. All three refer to members of the same taxonomic family, Macropodidae, and are distinguished according to size. The largest species in the family are called "kangaroos" and the smallest are generally called "wallabies". The term "wallaroos" refers to species of an intermediate size.[3] There are also the tree-kangaroos, another type of macropod, which inhabit the tropical rainforests of New Guinea, far northeastern Queensland and some of the islands in the region. This kind of kangaroo lives in the upper branches of trees.[4] A general idea of the relative size of these informal terms could be:
+
+    wallabies: head and body length of 45–105 cm and tail length of 33–75 cm; the dwarf wallaby (the smallest of all known macropod species) is 46 cm long and weighs 1.6 kg;
+    tree-kangaroos: ranging from Lumholtz's tree-kangaroo: body and head length of 48–65 cm, tail of 60–74 cm, weight of 7.2 kg (16 lb) for males and 5.9 kg (13 lb) for females; to the grizzled tree-kangaroo: length of 75–90 cm (30 to 35 in) and weight of 8–15 kg (18–33 lb);
+    wallaroos: the black wallaroo (the smallest of the two species) with a tail length of 60–70 cm and weight of 19–22 kg (41.8–48.5 lb) for males and 13 kg (28.6 lb) for females;
+    kangaroos: a large male can be 2 m (6 ft 7 in) tall and weigh 90 kg (200 lb).
+
+Kangaroos have large, powerful hind legs, large feet adapted for leaping, a long muscular tail for balance, and a small head. Like most marsupials, female kangaroos have a pouch called a marsupium in which joeys complete postnatal development.
+
+Because of its grazing habits, the kangaroo has developed specialized teeth that are rare among mammals. Its incisors are able to crop grass close to the ground and its molars chop and grind the grass. Since the two sides of the lower jaw are not joined or fused together, the lower incisors are farther apart, giving the kangaroo a wider bite. The silica in grass is abrasive, so kangaroo molars are ground down and they actually move forward in the mouth before they eventually fall out, and are replaced by new teeth that grow in the back.[5] This process is known as polyphyodonty and, amongst other mammals, only occurs in elephants and manatees.
+
+The large kangaroos have adapted much better than the smaller macropods to land clearing for pastoral agriculture and habitat changes brought to the Australian landscape by humans. Many of the smaller species are rare and endangered, while kangaroos are relatively plentiful.
+
+The kangaroo is a symbol of Australia, appears on the Australian coat of arms[6] and on some of its currency,[7] and is used as a logo for some of Australia's most well-known organisations, such as Qantas,[8] and as the roundel of the Royal Australian Air Force.[9] The kangaroo is important to both Australian culture and the national image, and consequently there are numerous popular culture references.
+
+Wild kangaroos are shot for meat, leather hides, and to protect grazing land.[10] Kangaroo meat has perceived health benefits for human consumption compared with traditional meats due to the low level of fat on kangaroos.[11]
+Contents
+
+    1 Terminology
+    2 Taxonomy and description
+        2.1 Comparison with wallabies
+    3 Biology and behaviour
+        3.1 Locomotion
+        3.2 Diet
+            3.2.1 Absence of digestive methane release
+        3.3 Social and sexual behavior
+        3.4 Predators
+        3.5 Adaptations
+        3.6 Blindness
+        3.7 Reproduction and life cycle
+    4 Interaction with humans
+        4.1 Conflict with vehicles
+    5 Emblems and popular culture
+    6 Meat
+    7 See also
+    8 References
+    9 Further reading
+    10 External links
+
+Terminology
+A male red kangaroo
+
+The word kangaroo derives from the Guugu Yimithirr word gangurru, referring to eastern grey kangaroos.[12][13] The name was first recorded as "kanguru" on 12 July 1770 in an entry in the diary of Sir Joseph Banks; this occurred at the site of modern Cooktown, on the banks of the Endeavour River, where HMS Endeavour under the command of Lieutenant James Cook was beached for almost seven weeks to repair damage sustained on the Great Barrier Reef.[14] Cook first referred to kangaroos in his diary entry of 4 August. Guugu Yimithirr is the language of the people of the area.
+
+A common myth about the kangaroo's English name is that it was a Guugu Yimithirr phrase for "I don't know" or "I don't understand".[15] According to this legend, Cook and Banks were exploring the area when they happened upon the animal. They asked a nearby local what the creatures were called. The local responded "kangaroo", said to mean "I don't know/understand", which Cook then took to be the name of the creature.[16] Anthropologist Walter Roth was trying to correct this legend as far back as in 1898, but few took note until 1972 when linguist John B. Haviland in his research with the Guugu Yimithirr people was able to confirm that gangurru referred to a rare large dark-coloured species of kangaroo.[16][17] However, when Phillip Parker King visited the Endeavour River region in 1819 and 1820, he maintained that the local word was not kangaroo but menuah perhaps referring to a different species of macropod.[18] There are similar, more credible stories of naming confusion, such as with the Yucatán Peninsula.[16]
+
+Kangaroos are often colloquially referred to as "roos".[19] Male kangaroos are called bucks, boomers, jacks, or old men; females are does, flyers, or jills; and the young ones are joeys.[20] The collective noun for a group of kangaroos is a mob, court, or troupe.[21]
+Taxonomy and description
+A male red kangaroo grazing
+
+There are four extant species that are commonly referred to as kangaroos:
+
+    The red kangaroo (Osphranter rufus)[22] is the largest surviving marsupial anywhere in the world. It occupies the arid and semi-arid centre of the country. The highest population densities of the red kangaroo occur in the rangelands of western New South Wales. Red kangaroos are commonly mistaken as the most abundant species of kangaroo, but eastern greys actually have a larger population.[23] A large male can be 2 metres (6 ft 7 in) tall and weighs 90 kg (200 lb).[24]
+    The eastern grey kangaroo (Macropus giganteus)[22] is less well-known than the red (outside Australia), but the most often seen, as its range covers the fertile eastern part of the country. The range of the eastern grey kangaroo extends from the top of the Cape York Peninsula in northern Queensland down to Victoria, as well as areas of southeastern Australia and Tasmania. Population densities of eastern grey kangaroos usually peak near 100 per km2 in suitable habitats of open woodlands. Populations are more limited in areas of land clearance, such as farmland, where forest and woodland habitats are limited in size or abundance.[23]
+    The western grey kangaroo (Macropus fuliginosus)[22] is slightly smaller again at about 54 kg (119 lb) for a large male. It is found in the southern part of Western Australia, South Australia near the coast, and the Murray–Darling basin. The highest population densities occur in the western Riverina district of New South Wales and in the western areas of the Nullarbor Plain in Western Australia. Populations may have declined, particularly in agricultural areas. The species has a high tolerance to the plant toxin sodium fluoroacetate, which indicates a possible origin from the southwest region of Australia.[23]
+    The antilopine kangaroo (Osphranter antilopinus)[22] is, essentially, the far northern equivalent of the eastern grey and western grey kangaroos. It is sometimes referred to as the antilopine wallaroo, but in behaviour and habitat it is more similar to the red, eastern grey and western grey kangaroos. Like them, it is a creature of the grassy plains and woodlands, and gregarious. Its name comes from its fur, which is similar in colour and texture to that of antelopes. Characteristically, the noses of males swell behind the nostrils. This enlarges nasal passages and allows them to release more heat in hot and humid climates.[23]
+
+The palatal view of a Sthenurus sp. skull
+
+In addition, there are about 50 smaller macropods closely related to the kangaroos in the family Macropodidae. Kangaroos and other macropods share a common ancestor with the Phalangeridae from the Middle Miocene.[25] This ancestor was likely arboreal and lived in the canopies of the extensive forests that covered most of Australia at that time, when the climate was much wetter, and fed on leaves and stems.[26] From the Late Miocene through the Pliocene and into the Pleistocene the climate got drier, which led to a decline of forests and expansion of grasslands. At this time, there was a radiation of macropodids characterised by enlarged body size and adaptation to the low quality grass diet with the development of foregut fermentation.[26] The most numerous early macropods, the Balbaridae and the Bulungmayinae, became extinct in the Late Miocene around 5–10 mya.[27] There is dispute over the relationships of the two groups to modern kangaroos and rat-kangaroos. Some argue that the balbarines were the ancestors of rat-kangaroos and the bulungmayines were the ancestors of kangaroos.[28] while others hold the contrary view.[29]
+The Kongouro from New Holland, a 1772 painting of a kangaroo by George Stubbs
+
+The middle to late bulungmayines, Ganguroo and Wanburoo lacked digit 1 of the hind foot and digits 2 and 3 were reduced and partly under the large digit 4, much like the modern kangaroo foot. This would indicate that they were bipedal. In addition, their ankle bones had an articulation that would have prohibited much lateral movements, an adaptation for bipedal hopping.[27] Species related to the modern grey kangaroos and wallaroos begin to appear in the Pliocene. The red kangaroo appears to be the most recently evolved kangaroo, with its fossil record not going back beyond the Pleistocene era, 1–2 mya.[30]
+
+The first kangaroo to be exhibited in the Western world was an example shot by John Gore, an officer on Captain Cook's ship, HMS Endeavour, in 1770.[31][32] The animal was shot and its skin and skull transported back to England whereupon it was stuffed (by taxidermists who had never seen the animal before) and displayed to the general public as a curiosity. The first glimpse of a kangaroo for many 18th-century Britons was a painting by George Stubbs.[33]
+Comparison with wallabies
+
+Kangaroos and wallabies belong to the same taxonomic family (Macropodidae) and often the same genera, but kangaroos are specifically categorised into the four largest species of the family. The term wallaby is an informal designation generally used for any macropod that is smaller than a kangaroo or a wallaroo that has not been designated otherwise.[3]
+Biology and behaviour
+See also: Red kangaroo § Behaviour, and Eastern grey kangaroo § Behaviour
+Locomotion
+A Tasmanian eastern grey kangaroo in motion
+
+Kangaroos are the only large animals to use hopping as a means of locomotion. The comfortable hopping speed for a red kangaroo is about 20–25 km/h (12–16 mph), but speeds of up to 70 km/h (43 mph) can be attained over short distances, while it can sustain a speed of 40 km/h (25 mph) for nearly 2 km (1.2 mi).[34] During a hop, the powerful gastrocnemius muscles lift the body off the ground while the smaller plantaris muscle, which attaches near the large fourth toe, is used for push-off. Seventy percent of potential energy is stored in the elastic tendons.[35] At slow speeds, it employs pentapedal locomotion, using its tail to form a tripod with its two forelimbs while bringing its hind feet forward. Both pentapedal walking and fast hopping are energetically costly. Hopping at moderate speeds is the most energy efficient, and a kangaroo moving above 15 km/h (9.3 mph) maintains energy consistency more than similarly sized animals running at the same speed.[30]
+Diet
+Kangaroos in their native grassland habitat
+
+Kangaroos have single-chambered stomachs quite unlike those of cattle and sheep, which have four compartments.[36][37] They sometimes regurgitate the vegetation they have eaten, chew it as cud, and then swallow it again for final digestion. However, this is a different, more strenuous, activity than it is in ruminants, and does not take place as frequently.[38]
+
+Different species of kangaroos have different diets, although all are strict herbivores. The eastern grey kangaroo is predominantly a grazer, and eats a wide variety of grasses, whereas some other species such as the red kangaroo include significant amounts of shrubs in their diets. Smaller species of kangaroos also consume hypogeal fungi. Many species are nocturnal,[39] and crepuscular,[40][41] usually spending the hot days resting in shade, and the cool evenings, nights and mornings moving about and feeding.
+Absence of digestive methane release
+
+Despite having herbivorous diets similar to ruminants such as cattle, which release large quantities of digestive methane through exhaling and eructation (burping), kangaroos release virtually none. The hydrogen byproduct of fermentation is instead converted into acetate, which is then used to provide further energy. Scientists are interested in the possibility of transferring the bacteria responsible for this process from kangaroos to cattle, since the greenhouse gas effect of methane is 23 times greater than carbon dioxide per molecule.[42]
+Social and sexual behavior
+Western grey kangaroos
+
+Groups of kangaroos are called mobs, courts or troupes, which usually have 10 or more kangaroos in them. Living in mobs can provide protection for some of the weaker members of the group.[21] The size and stability of mobs vary between geographic regions,[26] with eastern Australia having larger and more stable aggregations than in arid areas farther west.[26] Larger aggregations display high amounts of interactions and complex social structures, comparable to that of ungulates.[26] One common behavior is nose touching and sniffing, which mostly occurs when an individual joins a group.[30] The kangaroo performing the sniffing gains much information from smell cues. This behavior enforces social cohesion without consequent aggression. During mutual sniffing, if one kangaroo is smaller, it will hold its body closer to the ground and its head will quiver, which serves as a possible form of submission.[30] Greetings between males and females are common, with larger males being the most involved in meeting females. Most other non-antagonistic behavior occurs between mothers and their young. Mother and young reinforce their bond through grooming. A mother will groom her young while it is suckling or after it is finished suckling.[30] A joey will nuzzle its mother's pouch if it wants access to it.
+
+Sexual activity of kangaroos consists of consort pairs.[43] Oestrous females roam widely and attract the attention of males with conspicuous signals.[43] A male will monitor a female and follow her every movement. He sniffs her urine to see if she is in oestrus, a process exhibiting the flehmen response. The male will then proceed to approach her slowly to avoid alarming her.[26] If the female does not run away, the male will continue by licking, pawing, and scratching her, and copulation will follow.[26] After copulation is over, the male will move on to another female. Consort pairing may take several days and the copulation is also long. Thus, a consort pair is likely to attract the attention of a rival male.[43] As larger males are tending bonds with females near oestrus, smaller males will tend to females that are farther from oestrus.[26] Dominant males can avoid having to sort through females to determine their reproductive status by searching for tending bonds held by the largest male they can displace without a fight.[26]
+Two male red kangaroos boxing
+
+Fighting has been described in all species of kangaroos. Fights between kangaroos can be brief or long and ritualised.[30] In highly competitive situations, such as males fighting for access to oestrous females or at limited drinking spots, the fights are brief.[30] Both sexes will fight for drinking spots, but long, ritualised fighting or "boxing" is largely done by males. Smaller males fight more often near females in oestrus, while the large males in consorts do not seem to get involved. Ritualised fights can arise suddenly when males are grazing together. However, most fights are preceded by two males scratching and grooming each other.[30] One or both of them will adopt a high standing posture, with one male issuing a challenge by grasping the other male's neck with its forepaw. Sometimes, the challenge will be declined. Large males often reject challenges by smaller males. During fighting, the combatants adopt a high standing posture and paw at each other's heads, shoulders and chests. They will also lock forearms and wrestle and push each other as well as balance on their tails to kick each other in the abdomen.[30]
+
+Brief fights are similar, except there is no forearm locking. The losing combatant seems to use kicking more often, perhaps to parry the thrusts of the eventual winner. A winner is decided when a kangaroo breaks off the fight and retreats. Winners are able to push their opponents backwards or down to the ground. They also seem to grasp their opponents when they break contact and push them away.[30] The initiators of the fights are usually the winners. These fights may serve to establish dominance hierarchies among males, as winners of fights have been seen to displace their opponent from resting sites later in the day.[30] Dominant males may also pull grass to intimidate subordinate ones.[26]
+Predators
+
+Kangaroos have a few natural predators. The thylacine, considered by palaeontologists to have once been a major natural predator of the kangaroo, is now extinct. Other extinct predators included the marsupial lion, Megalania and Wonambi. However, with the arrival of humans in Australia at least 50,000 years ago and the introduction of the dingo about 5,000 years ago, kangaroos have had to adapt.
+
+Along with dingoes, introduced species such as foxes, feral cats, and both domestic and feral dogs, pose a threat to kangaroo populations. Kangaroos and wallabies are adept swimmers, and often flee into waterways if presented with the option. If pursued into the water, a large kangaroo may use its forepaws to hold the predator underwater so as to drown it.[44] Another defensive tactic described by witnesses is catching the attacking dog with the forepaws and disembowelling it with the hind legs.
+Adaptations
+A baby kangaroo (joey)
+
+Kangaroos have developed a number of adaptations to a dry, infertile country and highly variable climate. As with all marsupials, the young are born at a very early stage of development—after a gestation of 31–36 days. At this stage, only the forelimbs are somewhat developed, to allow the newborn to climb to the pouch and attach to a teat. In comparison, a human embryo at a similar stage of development would be about seven weeks old, and premature babies born at less than 23 weeks are usually not mature enough to survive. When the joey is born, it is about the size of a lima bean. The joey will usually stay in the pouch for about nine months (180–320 days for the Western Grey) before starting to leave the pouch for small periods of time. It is usually fed by its mother until reaching 18 months.
+
+The female kangaroo is usually pregnant in permanence, except on the day she gives birth; however, she has the ability to freeze the development of an embryo until the previous joey is able to leave the pouch. This is known as embryonic diapause, and will occur in times of drought and in areas with poor food sources. The composition of the milk produced by the mother varies according to the needs of the joey. In addition, the mother is able to produce two different kinds of milk simultaneously for the newborn and the older joey still in the pouch.
+
+Unusually, during a dry period, males will not produce sperm, and females will conceive only if enough rain has fallen to produce a large quantity of green vegetation.[45]
+The hind leg of a kangaroo
+
+Kangaroos and wallabies have large, elastic tendons in their hind legs. They store elastic strain energy in the tendons of their large hind legs, providing most of the energy required for each hop by the spring action of the tendons rather than by any muscular effort.[46] This is true in all animal species which have muscles connected to their skeletons through elastic elements such as tendons, but the effect is more pronounced in kangaroos.
+
+There is also a link between the hopping action and breathing: as the feet leave the ground, air is expelled from the lungs; bringing the feet forward ready for landing refills the lungs, providing further energy efficiency. Studies of kangaroos and wallabies have demonstrated, beyond the minimum energy expenditure required to hop at all, increased speed requires very little extra effort (much less than the same speed increase in, say, a horse, dog or human), and the extra energy is required to carry extra weight. For kangaroos, the key benefit of hopping is not speed to escape predators—the top speed of a kangaroo is no higher than that of a similarly sized quadruped, and the Australian native predators are in any case less fearsome than those of other countries—but economy: in an infertile country with highly variable weather patterns, the ability of a kangaroo to travel long distances at moderately high speed in search of food sources is crucial to survival.
+
+New research has revealed that a kangaroo's tail acts as a third leg rather than just a balancing strut. Kangaroos have a unique three-stage walk where they plant their front legs and tail first, then push off their tail, followed lastly by the back legs. The propulsive force of the tail is equal to that of both the front and hind legs combined and performs as much work as what a human leg walking can at the same speed.[47]
+
+A DNA sequencing project of the genome of a member of the kangaroo family, the tammar wallaby, was started in 2004. It was a collaboration between Australia (mainly funded by the State of Victoria) and the National Institutes of Health in the US.[48] The tammar's genome was fully sequenced in 2011.[49] The genome of a marsupial such as the kangaroo is of great interest to scientists studying comparative genomics, because marsupials are at an ideal degree of evolutionary divergence from humans: mice are too close and have not developed many different functions, while birds are genetically too remote. The dairy industry could also benefit from this project.[50]
+Blindness
+
+Eye disease is rare but not new among kangaroos. The first official report of kangaroo blindness took place in 1994, in central New South Wales. The following year, reports of blind kangaroos appeared in Victoria and South Australia. By 1996, the disease had spread "across the desert to Western Australia".[51] Australian authorities were concerned the disease could spread to other livestock and possibly humans. Researchers at the Australian Animal Health Laboratories in Geelong detected a virus called the Wallal virus in two species of midges, believed to have been the carriers.[52][53] Veterinarians also discovered fewer than 3% of kangaroos exposed to the virus developed blindness.[51]
+Reproduction and life cycle
+See also: Red kangaroo § Reproduction, and Eastern grey kangaroo § Reproduction
+A newborn joey sucking on a teat in the pouch
+
+Kangaroo reproduction is similar to that of opossums. The egg (still contained in the shell membrane, a few micrometres thick, and with only a small quantity of yolk within it) descends from the ovary into the uterus. There it is fertilised and quickly develops into a neonate. Even in the largest kangaroo species (the red kangaroo), the neonate emerges after only 33 days. Usually, only one young is born at a time. It is blind, hairless, and only a few centimetres long; its hindlegs are mere stumps; it instead uses its more developed forelegs to climb its way through the thick fur on its mother's abdomen into the pouch, which takes about three to five minutes. Once in the pouch, it fastens onto one of the four teats and starts to feed. Almost immediately, the mother's sexual cycle starts again. Another egg descends into the uterus and she becomes sexually receptive. Then, if she mates and a second egg is fertilised, its development is temporarily halted. This is known as embryonic diapause, and will occur in times of drought and in areas with poor food sources. Meanwhile, the neonate in the pouch grows rapidly. After about 190 days, the baby (joey) is sufficiently large and developed to make its full emergence out of the pouch, after sticking its head out for a few weeks until it eventually feels safe enough to fully emerge. From then on, it spends increasing time in the outside world and eventually, after about 235 days, it leaves the pouch for the last time.[54] The lifespan of kangaroos averages at six years in the wild[55] to in excess of 20 years in captivity, varying by the species.[56] Most individuals, however, do not reach maturity in the wild.[57][58]
+Interaction with humans
+Aboriginal Australians hunting kangaroos
+A kangaroo in a domestic setting, Queensland, Australia, circa 1900–1910
+
+The kangaroo has always been a very important animal for Aboriginal Australians, for its meat, hide, bone, and tendon. Kangaroo hides were also sometimes used for recreation; in particular there are accounts of some tribes (Kurnai) using stuffed kangaroo scrotum as a ball for the traditional football game of marngrook. In addition, there were important Dreaming stories and ceremonies involving the kangaroo. Aherrenge is a current kangaroo dreaming site in the Northern Territory.[59]
+
+Unlike many of the smaller macropods, kangaroos have fared well since European settlement. European settlers cut down forests to create vast grasslands for sheep and cattle grazing, added stock watering points in arid areas, and have substantially reduced the number of dingoes.
+
+Kangaroos are shy and retiring by nature, and in normal circumstances present no threat to humans. In 2003, Lulu, an eastern grey which had been hand-reared, saved a farmer's life by alerting family members to his location when he was injured by a falling tree branch. She received the RSPCA Australia National Animal Valour Award on 19 May 2004.[60][61][62]
+
+There are very few records of kangaroos attacking humans without provocation; however, several such unprovoked attacks in 2004 spurred fears of a rabies-like disease possibly affecting the marsupials. The only reliably documented case of a fatality from a kangaroo attack occurred in New South Wales in 1936. A hunter was killed when he tried to rescue his two dogs from a heated fray. Other suggested causes for erratic and dangerous kangaroo behaviour include extreme thirst and hunger. In July 2011, a male red kangaroo attacked a 94-year-old woman in her own backyard as well as her son and two police officers responding to the situation. The kangaroo was capsicum sprayed (pepper sprayed) and later put down after the attack.[63][64]
+
+Kangaroos—even those that are not domesticated—[65]can communicate with humans, according to a research study.[65][66]
+Conflict with vehicles
+A "kangaroo crossing" sign on an Australian highway
+
+Nine out of ten animal collisions in Australia involve kangaroos. A collision with a vehicle is capable of killing a kangaroo. Kangaroos dazzled by headlights or startled by engine noise often leap in front of cars. Since kangaroos in mid-bound can reach speeds of around 50 km/h (31 mph) and are relatively heavy, the force of impact can be severe. Small vehicles may be destroyed, while larger vehicles may suffer engine damage. The risk of harm or death to vehicle occupants is greatly increased if the windscreen is the point of impact. As a result, "kangaroo crossing" signs are commonplace in Australia.
+
+Vehicles that frequent isolated roads, where roadside assistance may be scarce, are often fitted with "roo bars" to minimise damage caused by collision. Bonnet-mounted devices, designed to scare wildlife off the road with ultrasound and other methods, have been devised and marketed.
+
+If a female is the victim of a collision, animal welfare groups ask that her pouch be checked for any surviving joey, in which case it may be removed to a wildlife sanctuary or veterinary surgeon for rehabilitation. Likewise, when an adult kangaroo is injured in a collision, a vet, the RSPCA Australia or the National Parks and Wildlife Service can be consulted for instructions on proper care. In New South Wales, rehabilitation of kangaroos is carried out by volunteers from WIRES. Council road signs often list phone numbers for callers to report injured animals.
+Emblems and popular culture
+Main article: Kangaroo emblems and popular culture
+A kangaroo and an emu feature on the Australian coat of arms
+
+The kangaroo is a recognisable symbol of Australia. The kangaroo and emu feature on the Australian coat of arms. Kangaroos have also been featured on coins, most notably the five kangaroos on the Australian one dollar coin. The Australian Made logo consists of a golden kangaroo in a green triangle to show that a product is grown or made in Australia.
+
+Registered trademarks of early Australian companies using the kangaroo included Yung, Schollenberger & Co. Walla Walla Brand leather and skins (1890); Arnold V. Henn (1892) whose emblem showed a family of kangaroos playing with a skipping rope; Robert Lascelles & Co. linked the speed of the animal with its velocipedes (1896); while some overseas manufacturers, like that of "The Kangaroo" safety matches (made in Japan) of the early 1900s, also adopted the symbol. Even today, Australia's national airline, Qantas, uses a bounding kangaroo for its logo.[67]
+
+The kangaroo appears in Rudyard Kipling's Just So Stories, "The Sing-Song of Old Man Kangaroo", while the kangaroo is chased by a dingo, he gives Nqong the Big God's advice, that his legs and tail grew longest before five o'clock.[68]
+
+The kangaroo and wallaby feature predominantly in Australian sports teams names and mascots. Examples include the Australian national rugby league team (the Kangaroos) and the Australian national rugby union team (the Wallabies). In a nation-wide competition held in 1978 for the XII Commonwealth Games by the Games Australia Foundation Limited in 1982, Hugh Edwards' design was chosen; a simplified form of six thick stripes arranged in pairs extending from along the edges of a triangular centre represent both the kangaroo in full flight, and a stylised "A" for Australia.[67]
+
+Kangaroos are well represented in films, television, books, toys and souvenirs around the world. Skippy the Bush Kangaroo was a popular 1960s Australian children's television series about a fictional pet kangaroo. Kangaroos are featured in the Rolf Harris song "Tie Me Kangaroo Down, Sport" and several Christmas carols.
+Meat
+Main article: Kangaroo meat
+Kangaroo meat on sale in Melbourne
+
+The kangaroo has been a source of food for indigenous Australians for tens of thousands of years. Kangaroo meat is high in protein and low in fat (about 2%). Kangaroo meat has a high concentration of conjugated linoleic acid (CLA) compared with other foods, and is a rich source of vitamins and minerals.[69] Low fat diets rich in CLA have been studied for their potential in reducing obesity and atherosclerosis.[70][71]
+
+Kangaroo meat is sourced from wild animals and is seen by many as the best source of population control programs[72] as opposed to culling them as pests where carcasses are left in paddocks. Kangaroos are harvested by highly skilled, licensed shooters in accordance with a strict code of practice and are protected by state and federal legislation.[73][74]
+
+Kangaroo meat is exported to many countries around the world. However, it is not considered biblically kosher by Jews or Adventists.[75] It is considered halal according to Muslim dietary standards, because kangaroos are herbivorous

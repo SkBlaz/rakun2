@@ -212,4 +212,15 @@ keyword_detector = RakunKeyphraseDetector(hyperparameters)
 out_keywords = keyword_detector.find_keywords(EXAMPLE_DOCUMENT, input_type="string")
 print(out_keywords)
 
+print("\n\n")
+
+# Wiki page on marsupials + wiki page on kangaroos (concatenated)
+hyperparameters = {"num_keywords": 10,
+                   "merge_threshold": 0.8,
+                   "alpha": 0.5,
+                   "token_prune_len": 2}
+keyword_detector = RakunKeyphraseDetector(hyperparameters)
+out_keywords = keyword_detector.find_keywords("example_text_blob.txt", input_type="file")
+print(out_keywords)
+
 #keyword_detector.visualize_network()
