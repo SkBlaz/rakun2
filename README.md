@@ -14,12 +14,12 @@ The tool is distributed as a simple-to-use Python library. Simply
 ```python
 pip install rakun2
 ```
-Next, verify that main configurations of the algorithm return sensible results
+Next, verify that the main configurations of the algorithm return sensible results
 
 ```python
 python -m pytest ./tests/test_main_functionality.py 
 ```
-If all tests pass, you should be good to go.
+If all tests pass, you should be *good to go*.
 
 # Examples
 A simple self-contained example of keyphrases extracted from the Wiki article on Artificial Intelligence follows:
