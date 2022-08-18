@@ -324,15 +324,15 @@ class RakunKeyphraseDetector:
         potential_replacements = self.final_keywords\
             [self.hyperparameters["num_keywords"]:][::-1]
 
-        for enx, kw in enumerate(potential_output):
+        for enx, _ in enumerate(potential_output):
             for second_kw in range(enx + 1, len(potential_output)):
                 if enx + 1 < len(potential_output):
 
-                    k1 = potential_output[enx][0]
-                    k2 = potential_output[second_kw][0]
+                    key_first = potential_output[enx][0]
+                    key_second = potential_output[second_kw][0]
 
-                    longer_keyword = max(k1, k2, key=len)
-                    shorter_keyword = min(k1, k2, key=len)
+                    longer_keyword = max(key_first, key_second, key=len)
+                    shorter_keyword = min(key_first, key_second, key=len)
 
                     if shorter_keyword in longer_keyword and \
                        len(potential_replacements) > 0:
