@@ -2,6 +2,7 @@
 
 from typing import Dict, Any, Tuple, List
 from collections import Counter
+import operator
 import gzip
 from operator import itemgetter
 import json
@@ -314,6 +315,34 @@ class RakunKeyphraseDetector:
             self.tokens = [x for x in self.full_tokens if not x.isdigit()]
             del self.full_tokens
 
+    def match_sweep(self):
+        """ Replace too similar keywords with out-of final distribution ones """
+
+        potential_output = self.final_keywords\
+            [:self.hyperparameters["num_keywords"]]
+
+        potential_replacements = self.final_keywords\
+            [self.hyperparameters["num_keywords"]:][::-1]
+
+        for enx, kw in enumerate(potential_output):
+            for second_kw in range(enx + 1, len(potential_output)):
+                if enx + 1 < len(potential_output):
+
+                    k1 = potential_output[enx][0]
+                    k2 = potential_output[second_kw][0]
+
+                    longer_keyword = max(k1, k2, key=len)
+                    shorter_keyword = min(k1, k2, key=len)
+
+                    if shorter_keyword in longer_keyword and \
+                       len(potential_replacements) > 0:
+
+                        potential_output[
+                            second_kw] = potential_replacements.pop()
+
+        self.final_keywords = sorted(potential_output,
+                                     key=operator.itemgetter(1))[::-1]
+
     def find_keywords(self,
                       document: str,
                       input_type: str = "file") -> List[Tuple[str, float]]:
@@ -329,4 +358,5 @@ class RakunKeyphraseDetector:
         self.merge_tokens()
         self.get_document_graph()
         self.combine_keywords()
+        self.match_sweep()
         return self.final_keywords[:self.hyperparameters["num_keywords"]]

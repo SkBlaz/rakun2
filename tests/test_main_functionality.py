@@ -243,5 +243,5 @@ def test_retrieved_keyphrases_quality(num_keywords_inp):
 
     keywords = set(x[0] for x in out_keywords)
     assert "artificial intelligence" in keywords
+    assert "neural networks" in keywords
     assert "mathematical optimization" in keywords
-    assert "language processing" in keywords
