@@ -14,7 +14,7 @@ The tool is distributed as a simple-to-use Python library. Simply
 ```python
 pip install rakun2
 ```
-Next, verify that the main configurations of the algorithm return sensible results
+Next, verify that the main configurations of the algorithm return sensible results:
 
 ```python
 python -m pytest ./tests/test_main_functionality.py 
@@ -72,6 +72,7 @@ bash generate.sh
 From `containers` folder. The command will build a `rakun2.sif` image, you can use as any other Singularity container (`singularity exec rakun2.sif python {YourFileThatCallsTheLib}`. Further, `conda` users have `environment.yml` available, as well as `requirements.txt` (`pip install -r requirements.txt; pip install . --upgrade` for local install).
 
 # Citing this work
+
 ```
 @misc{https://doi.org/10.48550/arxiv.2208.07262,
   doi = {10.48550/ARXIV.2208.07262},
