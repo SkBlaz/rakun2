@@ -15,7 +15,7 @@ def parse_requirements(file):
 
 
 setup(name='rakun2',
-      version='0.02',
+      version='0.03',
       description=
       "RaKUn 2.0; Better faster stronger lighter",
       url='http://github.com/skblaz/mrakun',
