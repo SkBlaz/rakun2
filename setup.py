@@ -15,13 +15,13 @@ def parse_requirements(file):
 
 
 setup(name='rakun2',
-      version='0.21',
+      version='0.22',
       description=
       "RaKUn 2.0; Better faster stronger lighter",
-      url='http://github.com/skblaz/mrakun',
+      url='http://github.com/skblaz/rakun2',
       author='Blaž Škrlj',
       author_email='blaz.skrlj@ijs.si',
-      license='GPL3',
+      license='MIT',
       packages=find_packages(),
       zip_safe=False,
       install_requires=parse_requirements("requirements.txt"),
