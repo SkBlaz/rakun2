@@ -17,7 +17,7 @@ pip install rakun2
 Next, verify that the main configurations of the algorithm return sensible results:
 
 ```python
-python -m pytest ./tests/test_main_functionality.py 
+python -m pytest ./tests/*
 ```
 If all tests pass, you should be *good to go*.
 
