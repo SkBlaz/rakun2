@@ -1,4 +1,4 @@
-""" Main RaKUN 2.0 algorithm - DS paper 2022 """
+""" Main RaKUn 2.0 algorithm - DS paper 2022 """
 
 from typing import Dict, Any, Tuple, List
 from collections import Counter
