@@ -12,6 +12,8 @@ import re
 import networkx as nx
 import matplotlib.pyplot as plt
 import numpy as np
+import scipy as sp
+import scipy.sparse
 
 logging.basicConfig(format="%(asctime)s - %(message)s",
                     datefmt="%d-%b-%y %H:%M:%S")
@@ -137,6 +139,49 @@ class RakunKeyphraseDetector:
                                       key=itemgetter(1),
                                       reverse=True)
 
+    def pagerank_scipy_adapted(
+        self,
+        G,
+        alpha=0.85,
+        personalization=None,
+        max_iter=64,
+        tol=1.0e-2,
+        weight="weight"
+    ):
+
+        """
+        Adapted from NetworkX's nx.pagerank; we know how token graphs look like
+        hence can omit some intermediary processing to make it a bit faster.
+        The convergence criterion could also be adapted.
+        """
+
+        N = len(G)
+        if N == 0:
+            return {}
+
+        nodelist = list(G)
+        A = nx.to_scipy_sparse_array(G,
+                                     nodelist=nodelist,
+                                     weight=weight,
+                                     dtype=np.float32)
+        S = A.sum(axis=1)
+        S[S != 0] = np.divide(1.0, S[S != 0])
+        Q = sp.sparse.spdiags([S], 0, format="csr")
+        A, x = np.dot(Q, A), np.repeat(1.0 / N, N)
+        p = np.array([personalization.get(n, 0) for n in nodelist],
+                     dtype=np.float32)
+        p = p / np.sum(p)
+
+        for _ in range(max_iter):
+            xlast = x
+            x = alpha * (x @ A) + (
+                1 - alpha) * p
+            err = np.sum(np.absolute(x - xlast))
+            if err < tol:
+                return dict(zip(nodelist, map(np.float32, x)))
+
+        return dict(zip(nodelist, [1] * N))
+
     def get_document_graph(self, weight: int = 1):
         """ A method for obtaining the token graph """
 
@@ -156,9 +201,9 @@ class RakunKeyphraseDetector:
 
         self.main_graph.remove_edges_from(nx.selfloop_edges(self.main_graph))
         personalization = {a: self.term_counts[a] for a in self.tokens}
-
+        #personalization = np.array([self.term_counts.get(a, 0) for a in list(self.main_graph)], dtype=np.float32)
         if len(self.main_graph) > self.hyperparameters["num_keywords"]:
-            self.node_ranks = nx.pagerank(
+            self.node_ranks = self.pagerank_scipy_adapted(
                 self.main_graph,
                 alpha=self.hyperparameters["alpha"],
                 max_iter=self.hyperparameters["max_iter"],
