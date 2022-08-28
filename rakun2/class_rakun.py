@@ -138,48 +138,50 @@ class RakunKeyphraseDetector:
                                       key=itemgetter(1),
                                       reverse=True)
 
-    def pagerank_scipy_adapted(
-        self,
-        G,
-        alpha=0.85,
-        personalization=None,
-        max_iter=64,
-        tol=1.0e-2,
-        weight="weight"
-    ):
-
+    def pagerank_scipy_adapted(self,
+                               token_graph,
+                               alpha=0.85,
+                               personalization=None,
+                               max_iter=64,
+                               tol=1.0e-2,
+                               weight="weight"):
         """
         Adapted from NetworkX's nx.pagerank; we know how token graphs look like
         hence can omit some intermediary processing to make it a bit faster.
         The convergence criterion could also be adapted.
         """
 
-        N = len(G)
-        if N == 0:
+        num_nodes = len(token_graph)
+        if num_nodes == 0:
             return {}
 
-        nodelist = list(G)
-        A = nx.to_scipy_sparse_array(G,
-                                     nodelist=nodelist,
-                                     weight=weight,
-                                     dtype=np.float32)
-        S = A.sum(axis=1)
-        S[S != 0] = np.divide(1.0, S[S != 0])
-        Q = sp.sparse.spdiags([S], 0, format="csr")
-        A, x = np.dot(Q, A), np.repeat(1.0 / N, N)
-        p = np.array([personalization.get(n, 0) for n in nodelist],
-                     dtype=np.float32)
-        p = p / np.sum(p)
+        nodelist = list(token_graph)
+        token_sparse_matrix = nx.to_scipy_sparse_array(token_graph,
+                                                       nodelist=nodelist,
+                                                       weight=weight,
+                                                       dtype=np.float32)
+        normalization_array = token_sparse_matrix.sum(axis=1)
+        normalization_array[normalization_array != 0] = np.divide(
+            1.0, normalization_array[normalization_array != 0])
+        diagonal_norm = sp.sparse.spdiags([normalization_array],
+                                          0,
+                                          format="csr")
+        token_sparse_matrix, x_iteration = np.dot(
+            diagonal_norm,
+            token_sparse_matrix), np.repeat(1.0 / num_nodes, num_nodes)
+        pers_array = np.array([personalization.get(n, 0) for n in nodelist],
+                              dtype=np.float32)
+        pers_array = pers_array / np.sum(pers_array)
 
         for _ in range(max_iter):
-            xlast = x
-            x = alpha * (x @ A) + (
-                1 - alpha) * p
-            err = np.sum(np.absolute(x - xlast))
+            xlast = x_iteration
+            x_iteration = alpha * (x_iteration @ token_sparse_matrix) + (
+                1 - alpha) * pers_array
+            err = np.sum(np.absolute(x_iteration - xlast))
             if err < tol:
-                return dict(zip(nodelist, map(np.float32, x)))
+                return dict(zip(nodelist, map(np.float32, x_iteration)))
 
-        return dict(zip(nodelist, [1] * N))
+        return dict(zip(nodelist, [1] * num_nodes))
 
     def get_document_graph(self, weight: int = 1):
         """ A method for obtaining the token graph """
@@ -200,7 +202,7 @@ class RakunKeyphraseDetector:
 
         self.main_graph.remove_edges_from(nx.selfloop_edges(self.main_graph))
         personalization = {a: self.term_counts[a] for a in self.tokens}
-        #personalization = np.array([self.term_counts.get(a, 0) for a in list(self.main_graph)], dtype=np.float32)
+
         if len(self.main_graph) > self.hyperparameters["num_keywords"]:
             self.node_ranks = self.pagerank_scipy_adapted(
                 self.main_graph,
