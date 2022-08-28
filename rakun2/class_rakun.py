@@ -13,7 +13,6 @@ import networkx as nx
 import matplotlib.pyplot as plt
 import numpy as np
 import scipy as sp
-import scipy.sparse
 
 logging.basicConfig(format="%(asctime)s - %(message)s",
                     datefmt="%d-%b-%y %H:%M:%S")
