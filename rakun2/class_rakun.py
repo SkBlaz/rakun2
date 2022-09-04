@@ -140,7 +140,7 @@ class RakunKeyphraseDetector:
 
     def pagerank_scipy_adapted(self,
                                token_graph: nx.Graph,
-                               alpha: float = 0.85:,
+                               alpha: float = 0.85,
                                personalization: np.array = None,
                                max_iter: int = 64,
                                tol: float = 1.0e-2,
