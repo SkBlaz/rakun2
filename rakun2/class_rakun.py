@@ -139,12 +139,12 @@ class RakunKeyphraseDetector:
                                       reverse=True)
 
     def pagerank_scipy_adapted(self,
-                               token_graph,
-                               alpha=0.85,
-                               personalization=None,
-                               max_iter=64,
-                               tol=1.0e-2,
-                               weight="weight"):
+                               token_graph: nx.Graph,
+                               alpha: float = 0.85:,
+                               personalization: np.array = None,
+                               max_iter: int = 64,
+                               tol: float = 1.0e-2,
+                               weight: str = "weight"):
         """
         Adapted from NetworkX's nx.pagerank; we know how token graphs look like
         hence can omit some intermediary processing to make it a bit faster.
