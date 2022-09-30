@@ -84,5 +84,4 @@ From `containers` folder. The command will build a `rakun2.sif` image, you can u
   year = {2022},
   copyright = {Creative Commons Attribution 4.0 International}
 }
-
 ```
