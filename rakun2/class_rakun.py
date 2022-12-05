@@ -13,6 +13,7 @@ import networkx as nx
 import matplotlib.pyplot as plt
 import numpy as np
 import scipy as sp
+import fitz
 
 logging.basicConfig(format="%(asctime)s - %(message)s",
                     datefmt="%d-%b-%y %H:%M:%S")
@@ -231,6 +232,13 @@ class RakunKeyphraseDetector:
             with open(document, "r", encoding="utf-8") as doc:
                 full_document = doc.read().split("\n")
 
+        if input_type == "pdf":
+            with fitz.open(document) as doc:
+                full_document = []
+                for page in doc:
+                    page_text = page.get_text("text").split("\n")
+                    full_document.extend(page_text)
+                    
         elif input_type == "string":
             if isinstance(document, list):
                 return document
@@ -238,6 +246,7 @@ class RakunKeyphraseDetector:
             if isinstance(document, str):
                 full_document = document.split("\n")
 
+        
             else:
                 raise NotImplementedError(
                     "Input type not recognized (str, list)")
