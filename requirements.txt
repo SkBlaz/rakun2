@@ -14,3 +14,4 @@ six>=1.16.0
 tqdm>=4.60
 pytest>=7.1.2
 pytest-sugar>=0.9.5
+pymupdf>=1.21.0

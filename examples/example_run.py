@@ -1,7 +1,6 @@
 """ A generic usecase example """
 
 from rakun2 import RakunKeyphraseDetector
-
 EXAMPLE_DOCUMENT = """
 Artificial intelligence (AI) is intelligence demonstrated by machines, as opposed to the natural intelligence displayed by animals including humans. AI research has been defined as the field of study of intelligent agents, which refers to any system that perceives its environment and takes actions that maximize its chance of achieving its goals.[a]
 
@@ -224,3 +223,15 @@ out_keywords = keyword_detector.find_keywords("example_text_blob.txt", input_typ
 print(out_keywords)
 
 #keyword_detector.visualize_network()
+
+# 2 column PDF file on Contextualized Sense Embeddings
+
+hyperparameters = {"num_keywords": 10,
+                   "merge_threshold": 0.5,
+                   "alpha": 0.5,
+                   "token_prune_len": 3}
+
+keyword_detector = RakunKeyphraseDetector(hyperparameters)
+out_keywords = keyword_detector.find_keywords("scarlini_etal_emnlp2020.pdf", input_type="pdf")
+print(out_keywords)
+
