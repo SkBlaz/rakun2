@@ -237,7 +237,7 @@ class RakunKeyphraseDetector:
                 for page in doc:
                     page_text = page.get_text("text").split("\n")
                     full_document.extend(page_text)
-                    
+
         elif input_type == "string":
             if isinstance(document, list):
                 return document
@@ -245,7 +245,6 @@ class RakunKeyphraseDetector:
             if isinstance(document, str):
                 full_document = document.split("\n")
 
-        
             else:
                 raise NotImplementedError(
                     "Input type not recognized (str, list)")
