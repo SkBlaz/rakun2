@@ -225,14 +225,13 @@ class RakunKeyphraseDetector:
         final_scores = rank_distribution * token_length_distribution
         self.node_ranks = dict(zip(token_list, final_scores))
 
-    def parse_input(self, document: str, input_type: str) -> None:
+    def parse_input(self, document: str, input_type: str, encoding: str = "utf-8") -> None:
         """ Input parsing method """
-
         if input_type == "file":
-            with open(document, "r", encoding="utf-8") as doc:
+            with open(document, "r", encoding=encoding) as doc:
                 full_document = doc.read().split("\n")
 
-        if input_type == "pdf":
+        elif input_type == "pdf":
             with fitz.open(document) as doc:
                 full_document = []
                 for page in doc:
@@ -400,13 +399,14 @@ class RakunKeyphraseDetector:
 
     def find_keywords(self,
                       document: str,
-                      input_type: str = "file") -> List[Tuple[str, float]]:
+                      input_type: str = "file",
+                      encoding: str = "utf-8") -> List[Tuple[str, float]]:
         """
         The main method responsible calling the child methods, yielding
         the final set of (ranked) keywords.
         """
 
-        document = self.parse_input(document, input_type=input_type)
+        document = self.parse_input(document, input_type=input_type, encoding = encoding)
         self.document = " ".join(document)
         self.tokenize()
         self.compute_tf_scores()
