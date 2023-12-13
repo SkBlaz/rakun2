@@ -93,7 +93,4 @@ docker run -d -p 8000:8000 rakun_test
 
 https://link.springer.com/chapter/10.1007/978-3-031-18840-4_27#citeas
 
-
-Certainly! Here's a rewritten version of the provided text, suitable for inclusion in a README.md file:
-
 ---
