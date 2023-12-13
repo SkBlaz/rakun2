@@ -1,5 +1,5 @@
-bootstrap: docker
-From: ubuntu:18.04
+Bootstrap: docker
+From: ubuntu
 
 %labels
 
