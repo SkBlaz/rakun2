@@ -71,6 +71,26 @@ bash generate.sh
 ```
 From `containers` folder. The command will build a `rakun2.sif` image, you can use as any other Singularity container (`singularity exec rakun2.sif python {YourFileThatCallsTheLib}`. Further, `conda` users have `environment.yml` available, as well as `requirements.txt` (`pip install -r requirements.txt; pip install . --upgrade` for local install).
 
+### API Endpoint via Docker
+
+Our project includes an API accessible through a Docker container. To set up and run the API from `api` folder, use the following commands:
+
+```bash
+docker build -t rakun_test .
+docker run -d -p 8000:8000 rakun_test
+```
+
+#### Documentation and Endpoints
+
+- **SwaggerUI Documentation**: Once the container is running, you can access the SwaggerUI documentation at `localhost:8000/docs#`.
+- **Endpoints**:
+  - **Keyword extraction from text**: Use `localhost:8000/get_keywords` for analyzing text.
+  - **Keyword extraction from PDFs**: Use `localhost:8000/get_keywords_pdf` for analyzing PDF documents.
+
+
+
 # Citing this work
 
 https://link.springer.com/chapter/10.1007/978-3-031-18840-4_27#citeas
+
+---
