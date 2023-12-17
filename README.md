@@ -77,7 +77,7 @@ Our project includes an API accessible through a Docker container. To set up and
 
 ```bash
 docker build -t rakun_test .
-docker run -d -p 8000:8000 rakun_test
+docker run -d -p 8000:8000 --rm -it rakun_test
 ```
 
 #### Documentation and Endpoints
