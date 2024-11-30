@@ -12,7 +12,6 @@ import re
 import networkx as nx
 import matplotlib.pyplot as plt
 import numpy as np
-import scipy.sparse as sps
 import fitz
 
 logging.basicConfig(format="%(asctime)s - %(message)s",
@@ -179,7 +178,8 @@ class RakunKeyphraseDetector:
         # Perform the power iteration for PageRank
         for _ in range(max_iter):
             xlast = x_iteration
-            x_iteration = alpha * (token_sparse_matrix_transp @ x_iteration) + (1 - alpha) * pers_array
+            x_iteration = alpha * (token_sparse_matrix_transp @ x_iteration) \
+                + (1 - alpha) * pers_array
             # Fast L1 norm calculation for convergence
             if np.sum(np.abs(x_iteration - xlast)) < tol:
                 break
