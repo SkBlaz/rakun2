@@ -3,4 +3,5 @@ disable=
     too-many-instance-attributes,
 	dangerous-default-value,
 	too-many-arguments,
-	too-many-locals
+	too-many-locals,
+	too-many-positional-arguments
