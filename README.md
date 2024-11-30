@@ -63,6 +63,34 @@ The main hyperparameter which should be considered "per usecase" is `merge_thres
 | alpha           | float ([0,1])   | The traversal parameter (PageRank's Alpha)                                    |
 | token_prune_len | int             | Lower length bound below which tokens are discarded during graph construction |
 
+
+# Using LLMs to improve output (very efficient)
+Running LLMs on massive corpora remains somewhat infeasible. Running RaKUn2.0 first, and using LLMs to fine tune/improve the outcome is also a feasible strategy. The following example illustrates a prompt combined with RaKUn2's output, and an example result.
+
+```
+You will be given a collection of keywords with scores. Improve the keywords' form. If it's just a word, make it into a phrase that better describes the concept. Results of keyword detection: [['representations', np.float64(0.0851959828287363)], ['embeddings', np.float64(0.054390477016568184)], ['sentences', np.float64(0.0451533542945981)], ['multilingual', np.float64(0.04452766478061676)], ['contexts', np.float64(0.03750281408429146)], ['synset', np.float64(0.02956203930079937)], ['automatically', np.float64(0.029321261681616306)], ['disambiguation', np.float64(0.023295994848012924)], ['annotated', np.float64(0.023235299857333302)], ['model', np.float64(0.020630033686757088)]]. Output your improved keywords in the same format (keep the scores).
+```
+
+
+results in (GPT 4o-preview, Nov 30th 2024).
+
+
+```
+[
+    ['semantic representations in language models', np.float64(0.0851959828287363)],
+    ['word and sentence embeddings for analysis', np.float64(0.054390477016568184)],
+    ['analyzing sentence structures and semantics', np.float64(0.0451533542945981)],
+    ['multilingual language processing techniques', np.float64(0.04452766478061676)],
+    ['contextual analysis in linguistics', np.float64(0.03750281408429146)],
+    ['synset-based lexical relationships', np.float64(0.02956203930079937)],
+    ['automatic language understanding systems', np.float64(0.029321261681616306)],
+    ['word sense disambiguation techniques', np.float64(0.023295994848012924)],
+    ['annotated language datasets for training', np.float64(0.023235299857333302)],
+    ['machine learning models for language processing', np.float64(0.020630033686757088)]
+]
+
+```
+
 # Containers and environments
 A ready-to-go Singularity container can be obtained by invoking
 
