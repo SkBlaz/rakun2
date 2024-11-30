@@ -12,7 +12,6 @@ import re
 import networkx as nx
 import matplotlib.pyplot as plt
 import numpy as np
-import scipy as sp
 import scipy.sparse as sps
 import fitz
 
@@ -166,7 +165,7 @@ class RakunKeyphraseDetector:
         token_sparse_matrix.data *= np.repeat(row_sums, np.diff(token_sparse_matrix.indptr))
 
         # Precompute the transpose of the sparse matrix
-        token_sparse_matrix_T = token_sparse_matrix.T
+        token_sparse_matrix_transp = token_sparse_matrix.T
 
         # Personalization vector
         pers_array = np.zeros(num_nodes, dtype=np.float32)
@@ -180,7 +179,7 @@ class RakunKeyphraseDetector:
         # Perform the power iteration for PageRank
         for _ in range(max_iter):
             xlast = x_iteration
-            x_iteration = alpha * (token_sparse_matrix_T @ x_iteration) + (1 - alpha) * pers_array
+            x_iteration = alpha * (token_sparse_matrix_transp @ x_iteration) + (1 - alpha) * pers_array
             # Fast L1 norm calculation for convergence
             if np.sum(np.abs(x_iteration - xlast)) < tol:
                 break
