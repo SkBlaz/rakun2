@@ -1,77 +1,44 @@
-import numpy as np
-import nltk
+import numpy as np, nltk, argparse
 from rakun2 import RakunKeyphraseDetector
 
+def get_sentences(t):
+    t = "\n".join(x for x in t.split("\n") if x.count(".") > 1).replace("\r\n"," ")
+    s = [x.strip() for x in nltk.sent_tokenize(t)]
+    return s[:3] if len(s) < 4 else s
 
-def get_sentences(text):
-    lines = text.split("\n")
-    text = "\n".join([x for x in lines if x.count(".") > 1])
-    text = text.replace("\r\n", " ")
-    sentences = [s.strip() for s in nltk.sent_tokenize(text)]
-    return sentences[:3] if len(sentences) < 4 else sentences
-
-
-def rank_sentences(text, aggregation="max", sentence_lim=500):
-    sentences = get_sentences(text)[:sentence_lim]
-    sentences = [
-        x.replace("et al.", "et al") for x in sentences
-        if not x.startswith("[")
-    ]
-    keyword_detector = RakunKeyphraseDetector(
-        {
-            "num_keywords": 30,
-            "merge_threshold": 0.5,
-            "alpha": 0.2,
-            "token_prune_len": 3
-        },
-        verbose=True)
-    keywords = keyword_detector.find_keywords(text, input_type="string")
-    agg_map = {"max": max, "mean": np.mean, "median": np.median}
-    agg_fn = agg_map.get(aggregation, np.mean)
-    srank, used = [], set()
-    for s in sentences:
+def rank_sentences(t, a="max", sl=500):
+    ss = [x.replace("et al.","et al") for x in get_sentences(t)[:sl] if x[:1] != "["]
+    kd = RakunKeyphraseDetector({"num_keywords":30,"merge_threshold":0.5,"alpha":0.2,"token_prune_len":3},True)
+    kw = kd.find_keywords(t,"string")
+    fn = lambda x: {"max":max,"mean":np.mean,"median":np.median}[a](x)
+    r,u = [],set()
+    for s in ss:
         if "\n" in s:
             continue
-        scores = [kw[1] for kw in keywords if kw[0] in s]
-        skip = False
-        for u in used:
-            if s.split()[:3] == u.split()[:3] or s[:len(s) //
-                                                   2] == u[:len(u) // 2]:
-                skip = True
-                break
-        if skip or s in used:
+        sc = [k[1] for k in kw if k[0] in s]
+        if any(s.split()[:3] == x.split()[:3] or s[:len(s)//2] == x[:len(x)//2] for x in u) or s in u:
             continue
-        used.add(s)
-        if scores:
-            srank.append((agg_fn(scores), s))
-    idx_map = {v: i for i, v in enumerate(srank)}
-    return sorted(srank, key=lambda x: x[0], reverse=True), idx_map, keywords
+        u.add(s)
+        if sc:
+            r.append((fn(sc),s))
+    im = {v:i for i,v in enumerate(r)}
+    return sorted(r,key=lambda x:x[0],reverse=True),im,kw
 
-
-def pretty_print(results, indices, top_k=3, return_text=True):
-    top = results[:top_k]
-    idxs = [indices[x] for x in top]
-    order = np.argsort(idxs)
-    r = np.random.randint(6, 9)
-    parts = [
-        top[k][1] + "<br>" if i % r == 0 else top[k][1]
-        for i, k in enumerate(order)
-    ]
-    o = " ".join(parts)
-    if return_text:
-        print("In summary:", o)
+def pretty_print(r, i, k=3, rt=True):
+    t = r[:k]
+    o = np.argsort([i[x] for x in t])
+    x = np.random.randint(6,9)
+    s = " ".join((t[j][1] + "<br>" if n % x == 0 else t[j][1]) for n,j in enumerate(o))
+    if rt:
+        print("In summary:", s)
     else:
-        return o
-
+        return s
 
 if __name__ == "__main__":
-    import argparse
-    parser = argparse.ArgumentParser()
-    parser.add_argument("--fname", default="dump2.txt")
-    args = parser.parse_args()
-    with open(args.fname, "r") as f:
-        text = f.read()
-    r1, i1, k1 = rank_sentences(text, "max")
-    pretty_print(r1, i1)
-    r2, i2, k2 = rank_sentences(text, "mean")
-    pretty_print(r2, i2)
+    p = argparse.ArgumentParser()
+    p.add_argument("--fname","-f",default="dump2.txt")
+    a = p.parse_args()
+    d = open(a.fname).read()
+    for m in ["max","mean"]:
+        rr, ii, kk = rank_sentences(d,m)
+        pretty_print(rr,ii)
