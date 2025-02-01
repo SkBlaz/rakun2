@@ -1,420 +1,456 @@
-""" Main RaKUn 2.0 algorithm - DS paper 2022 """
+"""
+Main RaKUn 2.0 algorithm - DS paper 2022
 
-from typing import Dict, Any, Tuple, List
+This module implements the RaKUn2.0 keyphrase extraction algorithm with additional design-level optimizations.
+"""
+
+from typing import Dict, Any, Tuple, List, Optional
 from collections import Counter
-import operator
 import gzip
-from operator import itemgetter
 import json
 import pkgutil
 import logging
 import re
+
 import networkx as nx
 import matplotlib.pyplot as plt
 import numpy as np
-import fitz
+import fitz  # PyMuPDF
 
-logging.basicConfig(format="%(asctime)s - %(message)s",
-                    datefmt="%d-%b-%y %H:%M:%S")
-logging.getLogger(__name__).setLevel(logging.INFO)
+# Configure logging
+logging.basicConfig(
+    format="%(asctime)s - %(message)s",
+    datefmt="%d-%b-%y %H:%M:%S"
+)
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.INFO)
 
 
 class RakunKeyphraseDetector:
     """
-    The main RaKUn2.0 class
+    RaKUn2.0 Keyword Detector with Additional Optimizations
+
+    Implements the main algorithm for keyphrase extraction based on RaKUn2.0,
+    with several design-level optimizations to improve runtime.
     """
 
     def __init__(self,
-                 hyperparameters: Dict[str, Any] = {},
-                 verbose: bool = True):
+                 hyperparameters: Optional[Dict[str, Any]] = None,
+                 verbose: bool = False) -> None:
+        """
+        Initialize the keyphrase detector.
 
+        Args:
+            hyperparameters: Optional dictionary of hyperparameters.
+            verbose: If True, logs processing information.
+        """
         self.verbose = verbose
-        self.tokens = None
-        self.sorted_terms_tf = None
-        self.document = None
-        self.full_tokens = None
-        self.bigram_counts = None
-        self.final_keywords = None
-        self.node_ranks = {}
-        self.main_graph = nx.Graph()
-        self.term_counts = None
-        self.space_factor = 0.5
+        self.document: Optional[str] = None
+        self.tokens: List[str] = []         # Original tokens (as extracted)
+        self.tokens_lower: List[str] = []   # Lowercase version of tokens for fast comparisons
+        self.full_tokens: List[str] = []
+        self.sorted_terms_tf: Optional[List[Tuple[str, int]]] = None
+        self.bigram_counts: Optional[Dict[Tuple[str, str], int]] = None
+        self.final_keywords: Optional[List[Tuple[str, float]]] = None
+        self.node_ranks: Dict[str, float] = {}
+        self.main_graph: nx.DiGraph = nx.DiGraph()
+        self.term_counts: Dict[str, int] = {}
+        self.space_factor_threshold: float = 0.5
 
-        if self.verbose:
-            logging.info("Initiated a keyword detector instance.")
-
-        self.pattern = re.compile(r"(?u)\b\w\w+\b")
+        # Set default hyperparameters if none provided.
+        if hyperparameters is None:
+            hyperparameters = {}
         self.hyperparameters = hyperparameters
-
-        if "token_prune_len" not in self.hyperparameters:
-            self.hyperparameters["token_prune_len"] = 1
-
-        if "num_keywords" not in self.hyperparameters:
-            self.hyperparameters["num_keywords"] = 10
-
-        if "alpha" not in self.hyperparameters:
-            self.hyperparameters["alpha"] = 0.1
-
-        if "max_iter" not in self.hyperparameters:
-            self.hyperparameters["max_iter"] = 100
-
-        if "merge_threshold" not in self.hyperparameters:
-            self.hyperparameters["merge_threshold"] = 0.5
-
-        if "deduplication" not in self.hyperparameters:
-            self.hyperparameters["deduplication"] = True
-
+        self.hyperparameters.setdefault("token_prune_len", 2)
+        self.hyperparameters.setdefault("num_keywords", 10)
+        self.hyperparameters.setdefault("alpha", 0.1)
+        self.hyperparameters.setdefault("max_iter", 100)
+        self.hyperparameters.setdefault("merge_threshold", 0.8)
+        self.hyperparameters.setdefault("deduplication", True)
         if "stopwords" not in self.hyperparameters:
+            stopwords_data = pkgutil.get_data(__name__, "stopwords.json.gz")
+            if stopwords_data is not None:
+                stopwords_data = gzip.decompress(stopwords_data)
+                stopwords_generic = set(json.loads(stopwords_data.decode()))
+                self.hyperparameters["stopwords"] = stopwords_generic
+            else:
+                self.hyperparameters["stopwords"] = set()
+        # Precompute lowercase stopwords for fast membership tests.
+        self.stopwords = {word.lower() for word in self.hyperparameters["stopwords"]}
 
-            # A collection of stopwords as default
-            stopwords = pkgutil.get_data(__name__, "stopwords.json.gz")
-            stopwords = gzip.decompress(stopwords)
-            stopwords_generic = set(json.loads(stopwords.decode()))
-            self.hyperparameters["stopwords"] = stopwords_generic
-
-    def visualize_network(
-        self,
-        labels: bool = False,
-        node_size: float = 0.1,
-        alpha: float = 0.01,
-        link_width: float = 0.01,
-        font_size: int = 3,
-        arrowsize: int = 1,
-    ):
-        """
-        A method aimed to visualize a given token network.
-        """
+        # Precompiled regex to extract words with at least two characters.
+        self.pattern = re.compile(r"(?u)\b\w\w+\b")
 
         if self.verbose:
-            logging.info("Visualizing network")
-        plt.figure(1, figsize=(10, 10), dpi=300)
-        pos = nx.spring_layout(self.main_graph, iterations=10)
+            logger.info("Initialized RaKUn2.0 keyword detector instance.")
 
-        node_colors = [x[1] * 1000 for x in self.node_ranks.items()]
-        sorted_top_k = np.argsort([x[1] for x in self.node_ranks.items()
-                                   ])[::-1][:20]
+    def visualize_network(self,
+                          show_labels: bool = False,
+                          base_node_size: float = 100,
+                          alpha: float = 0.8,
+                          edge_width: float = 0.5,
+                          font_size: int = 8,
+                          arrow_size: int = 10) -> None:
+        """
+        Visualize the token network graph.
 
-        final_colors, final_sizes = [], []
-        for enx in range(len(node_colors)):
-            if enx in sorted_top_k:
-                final_colors.append("red")
-                final_sizes.append(node_size * 10)
-            else:
-                final_colors.append("gray")
-                final_sizes.append(node_size)
+        Args:
+            show_labels: Whether to display node labels.
+            base_node_size: Base size for nodes; top keywords will appear larger.
+            alpha: Node transparency.
+            edge_width: Width of the edges.
+            font_size: Font size for labels.
+            arrow_size: Size of the arrowheads.
+        """
+        if self.verbose:
+            logger.info("Visualizing token network.")
+        plt.figure(figsize=(10, 10), dpi=300)
+        pos = nx.spring_layout(self.main_graph, iterations=50)
 
-        nx.draw_networkx_nodes(
-            self.main_graph,
-            pos,
-            node_size=final_sizes,
-            node_color=final_colors,
-            alpha=alpha,
-        )
-        nx.draw_networkx_edges(self.main_graph,
-                               pos,
-                               width=link_width,
-                               arrowsize=arrowsize)
+        # Identify top nodes based on rank.
+        if self.node_ranks:
+            sorted_nodes = sorted(self.node_ranks.items(), key=lambda x: x[1], reverse=True)
+            top_nodes = {node for node, _ in sorted_nodes[:20]}
+        else:
+            top_nodes = set()
 
-        if labels:
-            nx.draw_networkx_labels(self.main_graph,
-                                    pos,
-                                    font_size=font_size,
-                                    font_color="red")
+        node_colors = ["red" if node in top_nodes else "gray" for node in self.main_graph.nodes()]
+        node_sizes = [base_node_size * 2 if node in top_nodes else base_node_size for node in self.main_graph.nodes()]
+
+        nx.draw_networkx_nodes(self.main_graph, pos, node_size=node_sizes, node_color=node_colors, alpha=alpha)
+        nx.draw_networkx_edges(self.main_graph, pos, width=edge_width, arrowsize=arrow_size)
+
+        if show_labels:
+            nx.draw_networkx_labels(self.main_graph, pos, font_size=font_size, font_color="black")
 
         plt.tight_layout()
         plt.show()
 
-    def compute_tf_scores(self, document: str = None) -> None:
-        """Compute Term Frequency (TF) scores efficiently."""
+    def tokenize(self) -> None:
+        """
+        Tokenize the document.
 
-        if document is not None:
-            self.tokens = self.pattern.findall(document)
+        Uses a regex pattern to extract tokens. Also computes a lowercase version of tokens
+        to avoid repeated .lower() calls in subsequent processing.
+        """
+        if self.document is None:
+            return
 
-        term_counter = Counter(self.tokens)
+        whitespace_count = self.document.count(" ")
+        self.full_tokens = self.pattern.findall(self.document)
+        avg_space_factor = whitespace_count / len(self.full_tokens) if self.full_tokens else 0
+
+        if avg_space_factor < self.space_factor_threshold:
+            # Likely a language without explicit word boundaries.
+            raw_tokens = [ch for ch in self.document if ch not in {" ", "\n", "，"} and not ch.isdigit()]
+        else:
+            raw_tokens = [token for token in self.full_tokens if not token.isdigit()]
+
+        self.tokens = raw_tokens
+        self.tokens_lower = [token.lower() for token in raw_tokens]
+
+        if self.verbose:
+            logger.info("Tokenization complete. Total tokens: %d", len(self.tokens))
+
+    def compute_tf_scores(self, document: Optional[str] = None) -> None:
+        """
+        Compute term frequency (TF) scores for the document.
+        Uses the precomputed lowercase tokens for a case-insensitive count.
+
+        Args:
+            document: Optional document text. If provided, tokens are extracted from it.
+        """
+        if document is not None and not self.tokens:
+            # If tokens have not been computed yet, do it here.
+            self.document = document
+            self.tokenize()
+
+        # Use the lowercase tokens for frequency computation.
+        token_list = self.tokens_lower if self.tokens_lower else self.tokens
+        term_counter = Counter(token_list)
         self.term_counts = dict(term_counter)
         self.sorted_terms_tf = term_counter.most_common()
+        if self.verbose:
+            logger.info("Computed term frequency scores.")
 
-
-    def pagerank_scipy_adapted(
-        self,
-        token_graph: nx.Graph,
-        alpha: float = 0.85,
-        personalization: dict = None,
-        max_iter: int = 64,
-        tol: float = 1.0e-2,
-        weight: str = "weight",
-    ):
+    def pagerank_scipy_adapted(self,
+                               token_graph: nx.Graph,
+                               alpha: float = 0.85,
+                               personalization: Optional[Dict[str, float]] = None,
+                               max_iter: int = 64,
+                               tol: float = 1e-2,
+                               weight: str = "weight") -> Dict[str, float]:
         """
-        Further optimized PageRank computation for token graphs.
-        """
+        Compute PageRank scores using a sparse matrix power iteration.
 
-        num_nodes = len(token_graph)
+        Args:
+            token_graph: NetworkX graph representing tokens.
+            alpha: Damping factor.
+            personalization: Personalization vector.
+            max_iter: Maximum iterations.
+            tol: Convergence tolerance.
+            weight: Edge weight attribute.
+
+        Returns:
+            Dictionary mapping nodes to PageRank scores.
+        """
+        num_nodes = token_graph.number_of_nodes()
         if num_nodes == 0:
             return {}
 
-        nodelist = list(token_graph)
+        nodelist = list(token_graph.nodes())
         token_sparse_matrix = nx.to_scipy_sparse_array(
             token_graph, nodelist=nodelist, weight=weight, dtype=np.float32
         )
 
-        # Normalize rows of the sparse matrix
+        # Normalize rows of the sparse matrix.
         row_sums = np.array(token_sparse_matrix.sum(axis=1)).flatten()
-        nonzero_indices = row_sums > 0
-        row_sums[nonzero_indices] = 1.0 / row_sums[nonzero_indices]
-        token_sparse_matrix.data *= np.repeat(row_sums, np.diff(token_sparse_matrix.indptr))
+        nonzero = row_sums > 0
+        row_scaling = np.zeros_like(row_sums)
+        row_scaling[nonzero] = 1.0 / row_sums[nonzero]
+        token_sparse_matrix.data *= np.repeat(row_scaling, np.diff(token_sparse_matrix.indptr))
+        token_sparse_matrix_transpose = token_sparse_matrix.T
 
-        # Precompute the transpose of the sparse matrix
-        token_sparse_matrix_transp = token_sparse_matrix.T
+        # Build the personalization vector.
+        pers = np.zeros(num_nodes, dtype=np.float32)
+        if personalization:
+            for idx, node in enumerate(nodelist):
+                pers[idx] = personalization.get(node, 0)
+            if pers.sum() > 0:
+                pers /= pers.sum()
+            else:
+                pers.fill(1.0 / num_nodes)
+        else:
+            pers.fill(1.0 / num_nodes)
 
-        # Personalization vector
-        pers_array = np.zeros(num_nodes, dtype=np.float32)
-        for idx, node in enumerate(nodelist):
-            pers_array[idx] = personalization.get(node, 0)
-        pers_array /= pers_array.sum()
-
-        # Initialize scores
-        x_iteration = np.full(num_nodes, 1.0 / num_nodes, dtype=np.float32)
-
-        # Perform the power iteration for PageRank
+        # Initialize PageRank scores uniformly.
+        x = np.full(num_nodes, 1.0 / num_nodes, dtype=np.float32)
         for _ in range(max_iter):
-            xlast = x_iteration
-            x_iteration = alpha * (token_sparse_matrix_transp @ x_iteration) \
-                + (1 - alpha) * pers_array
-            # Fast L1 norm calculation for convergence
-            if np.sum(np.abs(x_iteration - xlast)) < tol:
+            x_last = x.copy()
+            x = alpha * (token_sparse_matrix_transpose @ x) + (1 - alpha) * pers
+            if np.sum(np.abs(x - x_last)) < tol:
                 break
 
-        return dict(zip(nodelist, x_iteration))
+        return dict(zip(nodelist, x))
 
+    def get_document_graph(self, weight: int = 1) -> None:
+        """
+        Build a directed token graph from the document.
 
+        Consecutive tokens form edges with a specified weight. Uses the precomputed
+        lowercase token list to avoid redundant lowercasing. Then computes node ranks
+        using PageRank (adjusted by token length).
+        
+        Args:
+            weight: Weight for each edge.
+        """
+        num_tokens = len(self.tokens_lower)
+        if num_tokens < 2:
+            self.main_graph = nx.DiGraph()
+            return
 
-    def get_document_graph(self, weight: int = 1):
-        """ A method for obtaining the token graph """
+        # Use zip to quickly form consecutive token pairs.
+        edges = list(zip(self.tokens_lower, self.tokens_lower[1:]))
+        edge_weights = Counter(edges)
+        self.main_graph = nx.DiGraph(((u, v, {"weight": w}) for (u, v), w in edge_weights.items()))
 
-        self.main_graph = nx.DiGraph()
-        num_tokens = len(self.tokens)
+        # Personalization based on term frequency.
+        personalization = {token: self.term_counts.get(token, 1) for token in self.tokens_lower}
 
-        for i in range(num_tokens):
-            if i + 1 < num_tokens:
-                node_u = self.tokens[i].lower()
-                node_v = self.tokens[i + 1].lower()
-
-                if self.main_graph.has_edge(node_u, node_v):
-                    self.main_graph[node_u][node_v]["weight"] += weight
-
-                else:
-                    self.main_graph.add_edge(node_u, node_v, weight=weight)
-
-        self.main_graph.remove_edges_from(nx.selfloop_edges(self.main_graph))
-        personalization = {a: self.term_counts[a] for a in self.tokens}
-
-        if len(self.main_graph) > self.hyperparameters["num_keywords"]:
-            self.node_ranks = self.pagerank_scipy_adapted(
+        if self.main_graph.number_of_nodes() > self.hyperparameters["num_keywords"]:
+            pr_scores = self.pagerank_scipy_adapted(
                 self.main_graph,
                 alpha=self.hyperparameters["alpha"],
                 max_iter=self.hyperparameters["max_iter"],
                 personalization=personalization,
-            ).items()
-
-            self.node_ranks = [[k, v] for k, v in self.node_ranks]
+            )
+            # Multiply score by token length (which is cheap since tokens are already lower-case).
+            self.node_ranks = {token: score * len(token) for token, score in pr_scores.items()}
         else:
+            self.node_ranks = {node: 1.0 for node in self.main_graph.nodes()}
 
-            self.node_ranks = [[k, 1.0] for k in self.main_graph.nodes()]
+        if self.verbose:
+            logger.info("Constructed document graph and computed node ranks.")
 
-        token_list = [k for k, v in self.node_ranks]
-        rank_distribution = np.array([y for _, y in self.node_ranks])
-        token_length_distribution = np.array(
-            [len(x) for x, _ in self.node_ranks])
+    def parse_input(self,
+                    document: str,
+                    input_type: str,
+                    encoding: str = "utf-8") -> List[str]:
+        """
+        Parse the input document based on its type.
 
-        final_scores = rank_distribution * token_length_distribution
-        self.node_ranks = dict(zip(token_list, final_scores))
+        Args:
+            document: The document content, file path, or PDF path.
+            input_type: One of 'file', 'pdf', or 'string'.
+            encoding: Encoding to use when reading from file.
 
-    def parse_input(self, document: str, input_type: str, encoding: str = "utf-8") -> None:
-        """ Input parsing method """
+        Returns:
+            A list of lines from the document.
+
+        Raises:
+            NotImplementedError: If the input_type is not recognized.
+        """
         if input_type == "file":
-            with open(document, "r", encoding=encoding) as doc:
-                full_document = doc.read().split("\n")
-
+            with open(document, "r", encoding=encoding) as f:
+                lines = f.read().splitlines()
         elif input_type == "pdf":
+            lines = []
             with fitz.open(document) as doc:
-                full_document = []
                 for page in doc:
-                    page_text = page.get_text("text").split("\n")
-                    full_document.extend(page_text)
-
+                    lines.extend(page.get_text("text").splitlines())
         elif input_type == "string":
             if isinstance(document, list):
-                return document
-
-            if isinstance(document, str):
-                full_document = document.split("\n")
-
+                lines = document
+            elif isinstance(document, str):
+                lines = document.splitlines()
             else:
-                raise NotImplementedError(
-                    "Input type not recognized (str, list)")
-
+                raise NotImplementedError("Input type not recognized (expected str or list).")
         else:
-            raise NotImplementedError(
-                "Please select valid input type (file, string)")
+            raise NotImplementedError("Please select a valid input type: 'file', 'pdf', or 'string'.")
+        return lines
 
-        return full_document
+    def merge_tokens(self) -> None:
+        """
+        Merge adjacent tokens into phrases when appropriate.
+
+        Uses precomputed bigram counts and a merge threshold to decide whether
+        two consecutive tokens should be merged. Comparisons use the lowercase tokens.
+        Deduplication is applied if enabled.
+        """
+        if len(self.tokens) < 2:
+            return
+
+        # Precompute bigrams from original tokens (order is preserved)
+        two_grams = list(zip(self.tokens, self.tokens[1:]))
+        self.bigram_counts = dict(Counter(two_grams))
+
+        merged_tokens = []
+        merged_set = set()
+        token_prune_len = self.hyperparameters["token_prune_len"]
+        merge_threshold = self.hyperparameters["merge_threshold"]
+
+        # Iterate using index to allow merging adjacent pairs.
+        i = 0
+        while i < len(self.tokens) - 1:
+            token1, token2 = self.tokens[i], self.tokens[i + 1]
+            # Use the lowercase versions for comparisons.
+            token1_low, token2_low = self.tokens_lower[i], self.tokens_lower[i + 1]
+            count1 = self.term_counts.get(token1_low, 0)
+            count2 = self.term_counts.get(token2_low, 0)
+            bg_count = self.bigram_counts.get((token1, token2), 0)
+            diff_metric = ((abs(count1 - bg_count) + abs(count2 - bg_count))
+                           / (count1 + count2)) if (count1 + count2) > 0 else 1.0
+
+            if (token1_low not in self.stopwords and token2_low not in self.stopwords and
+                    len(token1) > token_prune_len and len(token2) > token_prune_len and
+                    diff_metric < merge_threshold):
+                merged_phrase = f"{token1} {token2}"
+                merged_tokens.append(merged_phrase)
+                merged_set.update({token1, token2})
+                # Update term counts for the merged phrase.
+                self.term_counts[merged_phrase.lower()] = bg_count
+                self.term_counts[token1_low] = int(self.term_counts[token1_low] * merge_threshold)
+                self.term_counts[token2_low] = int(self.term_counts[token2_low] * merge_threshold)
+                i += 2  # Skip the next token as it has been merged.
+            else:
+                merged_tokens.append(token1)
+                i += 1
+
+        if i == len(self.tokens) - 1:
+            merged_tokens.append(self.tokens[-1])
+
+        if self.hyperparameters.get("deduplication", True):
+            merged_tokens = [token for token in merged_tokens if token not in merged_set]
+
+        # Update both tokens and their lowercase versions.
+        self.tokens = merged_tokens
+        self.tokens_lower = [token.lower() for token in merged_tokens]
+        if self.verbose:
+            logger.info("Merged adjacent tokens into phrases where applicable.")
 
     def combine_keywords(self) -> None:
         """
-        The keyword combination method. Individual keywords
-        are combined if needed.
-        Some deduplication also happens along the way.
+        Combine and deduplicate keywords.
+
+        Filters out stopwords and tokens that are too short, then sorts
+        the keywords by their scores.
         """
-
-        combined_keywords = []
-        appeared_tokens = {}
-
-        for ranked_node, score in self.node_ranks.items():
-
-            if (ranked_node.lower() in self.hyperparameters["stopwords"]
-                    or len(ranked_node) <= 2):
+        keywords = []
+        seen_tokens = set()
+        for token, score in self.node_ranks.items():
+            # token is already lowercase from earlier processing.
+            if token in self.stopwords or len(token) <= 2:
                 continue
+            if token not in seen_tokens:
+                keywords.append((token, score))
+                seen_tokens.add(token)
+        self.final_keywords = sorted(keywords, key=lambda x: x[1], reverse=True)
+        if self.verbose:
+            logger.info("Combined and deduplicated keywords.")
 
-            if ranked_node not in appeared_tokens:
-                ranked_tuple = [ranked_node, score]
-                combined_keywords.append(ranked_tuple)
+    def match_sweep(self) -> None:
+        """
+        Refine final keywords by replacing overly similar keywords.
 
-            appeared_tokens[ranked_node] = 1
+        If one keyword is a substring of another, the lower-ranked keyword is replaced
+        by a candidate from the lower-ranked pool, if available.
+        """
+        if not self.final_keywords:
+            return
 
-        sorted_keywords = sorted(combined_keywords,
-                                 key=itemgetter(1),
-                                 reverse=True)
+        num_keywords = self.hyperparameters["num_keywords"]
+        primary_keywords = self.final_keywords[:num_keywords]
+        replacement_candidates = self.final_keywords[num_keywords:][::-1]
 
-        self.final_keywords = sorted_keywords
+        # Cache keyword lengths to avoid repeated computations.
+        lengths = {kw: len(kw) for kw, _ in primary_keywords}
 
-    def merge_tokens(self) -> None:
-        """ Token merge method """
+        for i in range(len(primary_keywords)):
+            for j in range(i + 1, len(primary_keywords)):
+                if replacement_candidates:
+                    kw_i, _ = primary_keywords[i]
+                    kw_j, _ = primary_keywords[j]
+                    # Use precomputed lengths.
+                    if lengths[kw_i] >= lengths[kw_j]:
+                        longer, shorter = kw_i, kw_j
+                    else:
+                        longer, shorter = kw_j, kw_i
 
-        two_grams = [(self.tokens[enx], self.tokens[enx + 1])
-                     for enx in range(len(self.tokens) - 1)]
-        self.bigram_counts = dict(Counter(two_grams))
-        tmp_tokens = []
-        merged = set()
-        for enx in range(len(self.tokens) - 1):
-            token1 = self.tokens[enx]
-            token2 = self.tokens[enx + 1]
+                    if shorter in longer:
+                        primary_keywords[j] = replacement_candidates.pop()
+                        lengths[primary_keywords[j][0]] = len(primary_keywords[j][0])
 
-            count1 = self.term_counts[token1]
-            count2 = self.term_counts[token2]
-
-            bgc = self.bigram_counts[(token1, token2)]
-            bgs = np.abs(count1 - bgc) + np.abs(count2 - bgc)
-            bgs = bgs / (count1 + count2)
-
-            if (token1 not in self.hyperparameters["stopwords"]
-                    and token2 not in self.hyperparameters["stopwords"]):
-
-                if bgs < self.hyperparameters["merge_threshold"]:
-                    if (len(token2) > self.hyperparameters["token_prune_len"]
-                            and len(token1) >
-                            self.hyperparameters["token_prune_len"]):
-
-                        to_add = token1 + " " + token2
-                        tmp_tokens.append(to_add)
-
-                        merged.add(token1)
-                        merged.add(token2)
-
-                        self.term_counts[to_add] = bgc
-                        self.term_counts[token1] *= self.hyperparameters[
-                            "merge_threshold"]
-
-                        self.term_counts[token2] *= self.hyperparameters[
-                            "merge_threshold"]
-                else:
-                    continue
-
-            else:
-                tmp_tokens.append(token1)
-                tmp_tokens.append(token2)
-
-        # remove duplicate entries
-        if self.hyperparameters["deduplication"]:
-            to_drop = set()
-
-            for token in tmp_tokens:
-                if token in merged:
-                    to_drop.add(token)
-
-            tmp_tokens = [x for x in tmp_tokens if x not in to_drop]
-
-        self.tokens = tmp_tokens
-
-    def tokenize(self) -> None:
-        """ Core tokenization method """
-
-        whitespace_count = self.document.count(" ")
-        self.full_tokens = self.pattern.findall(self.document)
-
-        if len(self.full_tokens) > 0:
-            space_factor = whitespace_count / len(self.full_tokens)
-
-        else:
-            space_factor = 0
-
-        if space_factor < self.space_factor:
-
-            self.tokens = [
-                x for x in list(self.document.strip())
-                if not x == " " and not x == "\n" and not x == "，"
-            ]
-
-            self.tokens = [
-                x for x in self.tokens if not x.isdigit() and " " not in x
-            ]
-
-        else:
-            self.tokens = [x for x in self.full_tokens if not x.isdigit()]
-            del self.full_tokens
-
-    def match_sweep(self):
-        """ Replace too similar keywords with out-of final distribution ones """
-
-        potential_output = self.final_keywords\
-            [:self.hyperparameters["num_keywords"]]
-
-        potential_replacements = self.final_keywords\
-            [self.hyperparameters["num_keywords"]:][::-1]
-
-        for enx, _ in enumerate(potential_output):
-            for second_kw in range(enx + 1, len(potential_output)):
-                if enx + 1 < len(potential_output):
-
-                    key_first = potential_output[enx][0]
-                    key_second = potential_output[second_kw][0]
-
-                    longer_keyword = max(key_first, key_second, key=len)
-                    shorter_keyword = min(key_first, key_second, key=len)
-
-                    if shorter_keyword in longer_keyword and \
-                       len(potential_replacements) > 0:
-
-                        potential_output[
-                            second_kw] = potential_replacements.pop()
-
-        self.final_keywords = sorted(potential_output,
-                                     key=operator.itemgetter(1))[::-1]
+        self.final_keywords = sorted(primary_keywords, key=lambda x: x[1], reverse=True)
+        if self.verbose:
+            logger.info("Completed keyword similarity sweep and replacement.")
 
     def find_keywords(self,
                       document: str,
                       input_type: str = "file",
                       encoding: str = "utf-8") -> List[Tuple[str, float]]:
         """
-        The main method responsible calling the child methods, yielding
-        the final set of (ranked) keywords.
-        """
+        Extract and rank keywords from the input document.
 
-        document = self.parse_input(document, input_type=input_type, encoding = encoding)
-        self.document = " ".join(document)
+        Orchestrates the entire pipeline: input parsing, tokenization, merging, graph construction,
+        and keyword ranking.
+
+        Args:
+            document: The input document (file path, PDF path, or string).
+            input_type: The type of input ('file', 'pdf', or 'string').
+            encoding: Encoding for file inputs.
+
+        Returns:
+            A list of tuples (keyword, score) representing the top keywords.
+        """
+        lines = self.parse_input(document, input_type=input_type, encoding=encoding)
+        self.document = " ".join(lines)
         self.tokenize()
-        self.compute_tf_scores()
+        self.compute_tf_scores()  # Uses precomputed tokens
         self.merge_tokens()
         self.get_document_graph()
         self.combine_keywords()
         self.match_sweep()
+
+        if self.verbose:
+            logger.info("Keyword extraction complete.")
         return self.final_keywords[:self.hyperparameters["num_keywords"]]
