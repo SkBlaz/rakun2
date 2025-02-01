@@ -1,7 +1,7 @@
 """
 Main RaKUn 2.0 algorithm - DS paper 2022
 
-This module implements the RaKUn2.0 keyphrase extraction algorithm with 
+This module implements the RaKUn2.0 keyphrase extraction algorithm with
 additional design-level optimizations.
 """
 
@@ -31,7 +31,7 @@ class RakunKeyphraseDetector:
     """
     RaKUn2.0 Keyword Detector with Additional Optimizations
 
-    Implements the main algorithm for keyphrase extraction based on RaKUn2.0, with 
+    Implements the main algorithm for keyphrase extraction based on RaKUn2.0, with
     several design-level optimizations to improve runtime.
     """
 
@@ -76,7 +76,7 @@ class RakunKeyphraseDetector:
             else:
                 self.hyperparameters["stopwords"] = set()
         # Precompute lowercase stopwords for fast membership tests.
-        self.stopwords = {word.lower() 
+        self.stopwords = {word.lower()
                           for word in self.hyperparameters["stopwords"]}
 
         # Precompiled regex to extract words with at least two characters.
@@ -146,7 +146,7 @@ class RakunKeyphraseDetector:
         """
         Tokenize the document.
 
-        Uses a regex pattern to extract tokens. Also computes a lowercase version 
+        Uses a regex pattern to extract tokens. Also computes a lowercase version
         to avoid repeated .lower() calls in subsequent processing.
         """
         if self.document is None:
@@ -154,7 +154,7 @@ class RakunKeyphraseDetector:
 
         whitespace_count = self.document.count(" ")
         self.full_tokens = self.pattern.findall(self.document)
-        avg_space_factor = (whitespace_count / len(self.full_tokens) 
+        avg_space_factor = (whitespace_count / len(self.full_tokens)
                             if self.full_tokens else 0)
 
         if avg_space_factor < self.space_factor_threshold:
@@ -172,7 +172,7 @@ class RakunKeyphraseDetector:
         self.tokens_lower = [token.lower() for token in raw_tokens]
 
         if self.verbose:
-            logger.info("Tokenization complete. Total tokens: %d", 
+            logger.info("Tokenization complete. Total tokens: %d",
                         len(self.tokens))
 
     def compute_tf_scores(self, document: Optional[str] = None) -> None:
@@ -189,7 +189,7 @@ class RakunKeyphraseDetector:
             self.tokenize()
 
         token_list = (
-            self.tokens_lower if self.tokens_lower 
+            self.tokens_lower if self.tokens_lower
             else [token.lower() for token in self.tokens]
         )
         term_counter = Counter(token_list)
@@ -259,7 +259,7 @@ class RakunKeyphraseDetector:
 
         return dict(zip(nodelist, x))
 
-    def get_document_graph(self, weight: int = 1) -> None:
+    def get_document_graph(self) -> None:
         """
         Build a directed token graph from the document.
 
@@ -351,7 +351,7 @@ class RakunKeyphraseDetector:
         """
         Merge adjacent tokens into phrases when appropriate.
 
-        Uses precomputed bigram counts and a merge threshold to decide whether two 
+        Uses precomputed bigram counts and a merge threshold to decide whether two
         consecutive tokens should be merged. Comparisons use the lowercase tokens.
         Deduplication is applied if enabled.
         """
@@ -414,7 +414,7 @@ class RakunKeyphraseDetector:
         """
         Combine and deduplicate keywords.
 
-        Filters out stopwords and tokens that are too short, then sorts the keywords 
+        Filters out stopwords and tokens that are too short, then sorts the keywords
         by their scores.
         """
         keywords = []
@@ -434,7 +434,7 @@ class RakunKeyphraseDetector:
         """
         Refine final keywords by replacing overly similar keywords.
 
-        If one keyword is a substring of another, the lower-ranked keyword is 
+        If one keyword is a substring of another, the lower-ranked keyword is
         replaced by a candidate from the lower-ranked pool, if available.
         """
         if not self.final_keywords:
@@ -471,7 +471,7 @@ class RakunKeyphraseDetector:
         """
         Extract and rank keywords from the input document.
 
-        Orchestrates the entire pipeline: input parsing, tokenization, merging, graph 
+        Orchestrates the entire pipeline: input parsing, tokenization, merging, graph
         construction, and keyword ranking.
 
         Args:
