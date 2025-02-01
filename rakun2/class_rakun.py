@@ -1,7 +1,8 @@
 """
 Main RaKUn 2.0 algorithm - DS paper 2022
 
-This module implements the RaKUn2.0 keyphrase extraction algorithm with additional design-level optimizations.
+This module implements the RaKUn2.0 keyphrase extraction algorithm with 
+additional design-level optimizations.
 """
 
 from typing import Dict, Any, Tuple, List, Optional
@@ -30,8 +31,8 @@ class RakunKeyphraseDetector:
     """
     RaKUn2.0 Keyword Detector with Additional Optimizations
 
-    Implements the main algorithm for keyphrase extraction based on RaKUn2.0,
-    with several design-level optimizations to improve runtime.
+    Implements the main algorithm for keyphrase extraction based on RaKUn2.0, with 
+    several design-level optimizations to improve runtime.
     """
 
     def __init__(self,
@@ -47,7 +48,7 @@ class RakunKeyphraseDetector:
         self.verbose = verbose
         self.document: Optional[str] = None
         self.tokens: List[str] = []         # Original tokens (as extracted)
-        self.tokens_lower: List[str] = []   # Lowercase version of tokens for fast comparisons
+        self.tokens_lower: List[str] = []     # Lowercase version for comparisons
         self.full_tokens: List[str] = []
         self.sorted_terms_tf: Optional[List[Tuple[str, int]]] = None
         self.bigram_counts: Optional[Dict[Tuple[str, str], int]] = None
@@ -57,7 +58,6 @@ class RakunKeyphraseDetector:
         self.term_counts: Dict[str, int] = {}
         self.space_factor_threshold: float = 0.5
 
-        # Set default hyperparameters if none provided.
         if hyperparameters is None:
             hyperparameters = {}
         self.hyperparameters = hyperparameters
@@ -76,7 +76,8 @@ class RakunKeyphraseDetector:
             else:
                 self.hyperparameters["stopwords"] = set()
         # Precompute lowercase stopwords for fast membership tests.
-        self.stopwords = {word.lower() for word in self.hyperparameters["stopwords"]}
+        self.stopwords = {word.lower() 
+                          for word in self.hyperparameters["stopwords"]}
 
         # Precompiled regex to extract words with at least two characters.
         self.pattern = re.compile(r"(?u)\b\w\w+\b")
@@ -107,21 +108,36 @@ class RakunKeyphraseDetector:
         plt.figure(figsize=(10, 10), dpi=300)
         pos = nx.spring_layout(self.main_graph, iterations=50)
 
-        # Identify top nodes based on rank.
         if self.node_ranks:
-            sorted_nodes = sorted(self.node_ranks.items(), key=lambda x: x[1], reverse=True)
+            sorted_nodes = sorted(
+                self.node_ranks.items(), key=lambda x: x[1], reverse=True
+            )
             top_nodes = {node for node, _ in sorted_nodes[:20]}
         else:
             top_nodes = set()
 
-        node_colors = ["red" if node in top_nodes else "gray" for node in self.main_graph.nodes()]
-        node_sizes = [base_node_size * 2 if node in top_nodes else base_node_size for node in self.main_graph.nodes()]
+        node_colors = [
+            "red" if node in top_nodes else "gray"
+            for node in self.main_graph.nodes()
+        ]
+        node_sizes = [
+            base_node_size * 2 if node in top_nodes else base_node_size
+            for node in self.main_graph.nodes()
+        ]
 
-        nx.draw_networkx_nodes(self.main_graph, pos, node_size=node_sizes, node_color=node_colors, alpha=alpha)
-        nx.draw_networkx_edges(self.main_graph, pos, width=edge_width, arrowsize=arrow_size)
+        nx.draw_networkx_nodes(
+            self.main_graph, pos, node_size=node_sizes,
+            node_color=node_colors, alpha=alpha
+        )
+        nx.draw_networkx_edges(
+            self.main_graph, pos, width=edge_width, arrowsize=arrow_size
+        )
 
         if show_labels:
-            nx.draw_networkx_labels(self.main_graph, pos, font_size=font_size, font_color="black")
+            nx.draw_networkx_labels(
+                self.main_graph, pos, font_size=font_size,
+                font_color="black"
+            )
 
         plt.tight_layout()
         plt.show()
@@ -130,7 +146,7 @@ class RakunKeyphraseDetector:
         """
         Tokenize the document.
 
-        Uses a regex pattern to extract tokens. Also computes a lowercase version of tokens
+        Uses a regex pattern to extract tokens. Also computes a lowercase version 
         to avoid repeated .lower() calls in subsequent processing.
         """
         if self.document is None:
@@ -138,35 +154,44 @@ class RakunKeyphraseDetector:
 
         whitespace_count = self.document.count(" ")
         self.full_tokens = self.pattern.findall(self.document)
-        avg_space_factor = whitespace_count / len(self.full_tokens) if self.full_tokens else 0
+        avg_space_factor = (whitespace_count / len(self.full_tokens) 
+                            if self.full_tokens else 0)
 
         if avg_space_factor < self.space_factor_threshold:
             # Likely a language without explicit word boundaries.
-            raw_tokens = [ch for ch in self.document if ch not in {" ", "\n", "，"} and not ch.isdigit()]
+            raw_tokens = [
+                ch for ch in self.document
+                if ch not in {" ", "\n", "，"} and not ch.isdigit()
+            ]
         else:
-            raw_tokens = [token for token in self.full_tokens if not token.isdigit()]
+            raw_tokens = [
+                token for token in self.full_tokens if not token.isdigit()
+            ]
 
         self.tokens = raw_tokens
         self.tokens_lower = [token.lower() for token in raw_tokens]
 
         if self.verbose:
-            logger.info("Tokenization complete. Total tokens: %d", len(self.tokens))
+            logger.info("Tokenization complete. Total tokens: %d", 
+                        len(self.tokens))
 
     def compute_tf_scores(self, document: Optional[str] = None) -> None:
         """
         Compute term frequency (TF) scores for the document.
+
         Uses the precomputed lowercase tokens for a case-insensitive count.
 
         Args:
-            document: Optional document text. If provided, tokens are extracted from it.
+            document: Optional document text. If provided, tokens are extracted.
         """
         if document is not None and not self.tokens:
-            # If tokens have not been computed yet, do it here.
             self.document = document
             self.tokenize()
 
-        # Use the lowercase tokens for frequency computation.
-        token_list = self.tokens_lower if self.tokens_lower else self.tokens
+        token_list = (
+            self.tokens_lower if self.tokens_lower 
+            else [token.lower() for token in self.tokens]
+        )
         term_counter = Counter(token_list)
         self.term_counts = dict(term_counter)
         self.sorted_terms_tf = term_counter.most_common()
@@ -180,6 +205,7 @@ class RakunKeyphraseDetector:
                                max_iter: int = 64,
                                tol: float = 1e-2,
                                weight: str = "weight") -> Dict[str, float]:
+        # pylint: disable=unused-argument
         """
         Compute PageRank scores using a sparse matrix power iteration.
 
@@ -203,15 +229,15 @@ class RakunKeyphraseDetector:
             token_graph, nodelist=nodelist, weight=weight, dtype=np.float32
         )
 
-        # Normalize rows of the sparse matrix.
         row_sums = np.array(token_sparse_matrix.sum(axis=1)).flatten()
         nonzero = row_sums > 0
         row_scaling = np.zeros_like(row_sums)
         row_scaling[nonzero] = 1.0 / row_sums[nonzero]
-        token_sparse_matrix.data *= np.repeat(row_scaling, np.diff(token_sparse_matrix.indptr))
+        token_sparse_matrix.data *= np.repeat(
+            row_scaling, np.diff(token_sparse_matrix.indptr)
+        )
         token_sparse_matrix_transpose = token_sparse_matrix.T
 
-        # Build the personalization vector.
         pers = np.zeros(num_nodes, dtype=np.float32)
         if personalization:
             for idx, node in enumerate(nodelist):
@@ -223,11 +249,11 @@ class RakunKeyphraseDetector:
         else:
             pers.fill(1.0 / num_nodes)
 
-        # Initialize PageRank scores uniformly.
         x = np.full(num_nodes, 1.0 / num_nodes, dtype=np.float32)
         for _ in range(max_iter):
             x_last = x.copy()
-            x = alpha * (token_sparse_matrix_transpose @ x) + (1 - alpha) * pers
+            x = (alpha * (token_sparse_matrix_transpose @ x) +
+                 (1 - alpha) * pers)
             if np.sum(np.abs(x - x_last)) < tol:
                 break
 
@@ -240,7 +266,7 @@ class RakunKeyphraseDetector:
         Consecutive tokens form edges with a specified weight. Uses the precomputed
         lowercase token list to avoid redundant lowercasing. Then computes node ranks
         using PageRank (adjusted by token length).
-        
+
         Args:
             weight: Weight for each edge.
         """
@@ -249,25 +275,33 @@ class RakunKeyphraseDetector:
             self.main_graph = nx.DiGraph()
             return
 
-        # Use zip to quickly form consecutive token pairs.
         edges = list(zip(self.tokens_lower, self.tokens_lower[1:]))
         edge_weights = Counter(edges)
-        self.main_graph = nx.DiGraph(((u, v, {"weight": w}) for (u, v), w in edge_weights.items()))
+        self.main_graph = nx.DiGraph(
+            ((u, v, {"weight": w}) for (u, v), w in edge_weights.items())
+        )
 
-        # Personalization based on term frequency.
-        personalization = {token: self.term_counts.get(token, 1) for token in self.tokens_lower}
+        personalization = {
+            token: self.term_counts.get(token, 1)
+            for token in self.tokens_lower
+        }
 
-        if self.main_graph.number_of_nodes() > self.hyperparameters["num_keywords"]:
+        if self.main_graph.number_of_nodes() > \
+           self.hyperparameters["num_keywords"]:
             pr_scores = self.pagerank_scipy_adapted(
                 self.main_graph,
                 alpha=self.hyperparameters["alpha"],
                 max_iter=self.hyperparameters["max_iter"],
                 personalization=personalization,
             )
-            # Multiply score by token length (which is cheap since tokens are already lower-case).
-            self.node_ranks = {token: score * len(token) for token, score in pr_scores.items()}
+            self.node_ranks = {
+                token: score * len(token)
+                for token, score in pr_scores.items()
+            }
         else:
-            self.node_ranks = {node: 1.0 for node in self.main_graph.nodes()}
+            self.node_ranks = {
+                node: 1.0 for node in self.main_graph.nodes()
+            }
 
         if self.verbose:
             logger.info("Constructed document graph and computed node ranks.")
@@ -304,23 +338,26 @@ class RakunKeyphraseDetector:
             elif isinstance(document, str):
                 lines = document.splitlines()
             else:
-                raise NotImplementedError("Input type not recognized (expected str or list).")
+                raise NotImplementedError(
+                    "Input type not recognized (expected str or list)."
+                )
         else:
-            raise NotImplementedError("Please select a valid input type: 'file', 'pdf', or 'string'.")
+            raise NotImplementedError(
+                "Please select a valid input type: 'file', 'pdf', or 'string'."
+            )
         return lines
 
     def merge_tokens(self) -> None:
         """
         Merge adjacent tokens into phrases when appropriate.
 
-        Uses precomputed bigram counts and a merge threshold to decide whether
-        two consecutive tokens should be merged. Comparisons use the lowercase tokens.
+        Uses precomputed bigram counts and a merge threshold to decide whether two 
+        consecutive tokens should be merged. Comparisons use the lowercase tokens.
         Deduplication is applied if enabled.
         """
         if len(self.tokens) < 2:
             return
 
-        # Precompute bigrams from original tokens (order is preserved)
         two_grams = list(zip(self.tokens, self.tokens[1:]))
         self.bigram_counts = dict(Counter(two_grams))
 
@@ -329,17 +366,16 @@ class RakunKeyphraseDetector:
         token_prune_len = self.hyperparameters["token_prune_len"]
         merge_threshold = self.hyperparameters["merge_threshold"]
 
-        # Iterate using index to allow merging adjacent pairs.
         i = 0
         while i < len(self.tokens) - 1:
             token1, token2 = self.tokens[i], self.tokens[i + 1]
-            # Use the lowercase versions for comparisons.
             token1_low, token2_low = self.tokens_lower[i], self.tokens_lower[i + 1]
             count1 = self.term_counts.get(token1_low, 0)
             count2 = self.term_counts.get(token2_low, 0)
             bg_count = self.bigram_counts.get((token1, token2), 0)
-            diff_metric = ((abs(count1 - bg_count) + abs(count2 - bg_count))
-                           / (count1 + count2)) if (count1 + count2) > 0 else 1.0
+            diff_metric = ((abs(count1 - bg_count) + abs(count2 - bg_count)) /
+                           (count1 + count2)
+                           if (count1 + count2) > 0 else 1.0)
 
             if (token1_low not in self.stopwords and token2_low not in self.stopwords and
                     len(token1) > token_prune_len and len(token2) > token_prune_len and
@@ -347,11 +383,14 @@ class RakunKeyphraseDetector:
                 merged_phrase = f"{token1} {token2}"
                 merged_tokens.append(merged_phrase)
                 merged_set.update({token1, token2})
-                # Update term counts for the merged phrase.
                 self.term_counts[merged_phrase.lower()] = bg_count
-                self.term_counts[token1_low] = int(self.term_counts[token1_low] * merge_threshold)
-                self.term_counts[token2_low] = int(self.term_counts[token2_low] * merge_threshold)
-                i += 2  # Skip the next token as it has been merged.
+                self.term_counts[token1_low] = int(
+                    self.term_counts[token1_low] * merge_threshold
+                )
+                self.term_counts[token2_low] = int(
+                    self.term_counts[token2_low] * merge_threshold
+                )
+                i += 2
             else:
                 merged_tokens.append(token1)
                 i += 1
@@ -360,31 +399,34 @@ class RakunKeyphraseDetector:
             merged_tokens.append(self.tokens[-1])
 
         if self.hyperparameters.get("deduplication", True):
-            merged_tokens = [token for token in merged_tokens if token not in merged_set]
+            merged_tokens = [
+                token for token in merged_tokens if token not in merged_set
+            ]
 
-        # Update both tokens and their lowercase versions.
         self.tokens = merged_tokens
         self.tokens_lower = [token.lower() for token in merged_tokens]
         if self.verbose:
-            logger.info("Merged adjacent tokens into phrases where applicable.")
+            logger.info(
+                "Merged adjacent tokens into phrases where applicable."
+            )
 
     def combine_keywords(self) -> None:
         """
         Combine and deduplicate keywords.
 
-        Filters out stopwords and tokens that are too short, then sorts
-        the keywords by their scores.
+        Filters out stopwords and tokens that are too short, then sorts the keywords 
+        by their scores.
         """
         keywords = []
         seen_tokens = set()
         for token, score in self.node_ranks.items():
-            # token is already lowercase from earlier processing.
             if token in self.stopwords or len(token) <= 2:
                 continue
             if token not in seen_tokens:
                 keywords.append((token, score))
                 seen_tokens.add(token)
-        self.final_keywords = sorted(keywords, key=lambda x: x[1], reverse=True)
+        self.final_keywords = sorted(keywords, key=lambda x: x[1],
+                                     reverse=True)
         if self.verbose:
             logger.info("Combined and deduplicated keywords.")
 
@@ -392,8 +434,8 @@ class RakunKeyphraseDetector:
         """
         Refine final keywords by replacing overly similar keywords.
 
-        If one keyword is a substring of another, the lower-ranked keyword is replaced
-        by a candidate from the lower-ranked pool, if available.
+        If one keyword is a substring of another, the lower-ranked keyword is 
+        replaced by a candidate from the lower-ranked pool, if available.
         """
         if not self.final_keywords:
             return
@@ -402,27 +444,25 @@ class RakunKeyphraseDetector:
         primary_keywords = self.final_keywords[:num_keywords]
         replacement_candidates = self.final_keywords[num_keywords:][::-1]
 
-        # Cache keyword lengths to avoid repeated computations.
         lengths = {kw: len(kw) for kw, _ in primary_keywords}
 
-        for i in range(len(primary_keywords)):
-            for j in range(i + 1, len(primary_keywords)):
+        for i, (kw_i, _) in enumerate(primary_keywords):
+            for j, (kw_j, _) in enumerate(primary_keywords[i + 1:], start=i+1):
                 if replacement_candidates:
-                    kw_i, _ = primary_keywords[i]
-                    kw_j, _ = primary_keywords[j]
-                    # Use precomputed lengths.
                     if lengths[kw_i] >= lengths[kw_j]:
                         longer, shorter = kw_i, kw_j
                     else:
                         longer, shorter = kw_j, kw_i
-
                     if shorter in longer:
                         primary_keywords[j] = replacement_candidates.pop()
-                        lengths[primary_keywords[j][0]] = len(primary_keywords[j][0])
-
-        self.final_keywords = sorted(primary_keywords, key=lambda x: x[1], reverse=True)
+                        lengths[primary_keywords[j][0]] = \
+                            len(primary_keywords[j][0])
+        self.final_keywords = sorted(primary_keywords, key=lambda x: x[1],
+                                     reverse=True)
         if self.verbose:
-            logger.info("Completed keyword similarity sweep and replacement.")
+            logger.info(
+                "Completed keyword similarity sweep and replacement."
+            )
 
     def find_keywords(self,
                       document: str,
@@ -431,8 +471,8 @@ class RakunKeyphraseDetector:
         """
         Extract and rank keywords from the input document.
 
-        Orchestrates the entire pipeline: input parsing, tokenization, merging, graph construction,
-        and keyword ranking.
+        Orchestrates the entire pipeline: input parsing, tokenization, merging, graph 
+        construction, and keyword ranking.
 
         Args:
             document: The input document (file path, PDF path, or string).
@@ -442,7 +482,8 @@ class RakunKeyphraseDetector:
         Returns:
             A list of tuples (keyword, score) representing the top keywords.
         """
-        lines = self.parse_input(document, input_type=input_type, encoding=encoding)
+        lines = self.parse_input(document, input_type=input_type,
+                                 encoding=encoding)
         self.document = " ".join(lines)
         self.tokenize()
         self.compute_tf_scores()  # Uses precomputed tokens
