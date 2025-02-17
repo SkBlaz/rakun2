@@ -3,7 +3,7 @@ from rakun2 import RakunKeyphraseDetector
 
 def get_sentences(t):
     t = "\n".join(x for x in t.split("\n") if x.count(".") > 1).replace("\r\n"," ")
-    s = [x.strip() for x in nltk.sent_tokenize(t)]
+    s = [x.strip() for x in nltk.sent_tokenize(t.replace(";", "."))]
     return s[:3] if len(s) < 4 else s
 
 def rank_sentences(t, a="max", sl=500):
