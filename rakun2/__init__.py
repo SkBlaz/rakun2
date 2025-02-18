@@ -1,2 +1,4 @@
 """ Core init of the rakun2 library """
-from rakun2.class_rakun import *
+from rakun2.class_rakun import RakunKeyphraseDetector
+
+__all__ = ["RakunKeyphraseDetector"]
