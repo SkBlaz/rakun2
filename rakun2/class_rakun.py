@@ -12,6 +12,7 @@ import json
 import pkgutil
 import logging
 import re
+import tiktoken
 
 import networkx as nx
 import matplotlib.pyplot as plt
@@ -26,6 +27,8 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
 
+enc = tiktoken.get_encoding("cl100k_base")
+            
 
 class RakunKeyphraseDetector:
     """
@@ -61,6 +64,8 @@ class RakunKeyphraseDetector:
         if hyperparameters is None:
             hyperparameters = {}
         self.hyperparameters = hyperparameters
+        self.hyperparameters.setdefault("use_byte_tokeniser",False)
+
         self.hyperparameters.setdefault("token_prune_len", 2)
         self.hyperparameters.setdefault("num_keywords", 10)
         self.hyperparameters.setdefault("alpha", 0.1)
@@ -151,25 +156,28 @@ class RakunKeyphraseDetector:
         """
         if self.document is None:
             return
+        if self.hyperparameters['use_byte_tokeniser']:
+            self.tokens = list(map(str,enc.encode(self.document)))
+            self.tokens_lower = self.tokens
+        else:           
+            whitespace_count = self.document.count(" ")
+            self.full_tokens = self.pattern.findall(self.document)
+            avg_space_factor = (whitespace_count / len(self.full_tokens)
+                                if self.full_tokens else 0)
 
-        whitespace_count = self.document.count(" ")
-        self.full_tokens = self.pattern.findall(self.document)
-        avg_space_factor = (whitespace_count / len(self.full_tokens)
-                            if self.full_tokens else 0)
+            if avg_space_factor < self.space_factor_threshold:
+                # Likely a language without explicit word boundaries.
+                raw_tokens = [
+                    ch for ch in self.document
+                    if ch not in {" ", "\n", "，"} and not ch.isdigit()
+                ]
+            else:
+                raw_tokens = [
+                    token for token in self.full_tokens if not token.isdigit()
+                ]
 
-        if avg_space_factor < self.space_factor_threshold:
-            # Likely a language without explicit word boundaries.
-            raw_tokens = [
-                ch for ch in self.document
-                if ch not in {" ", "\n", "，"} and not ch.isdigit()
-            ]
-        else:
-            raw_tokens = [
-                token for token in self.full_tokens if not token.isdigit()
-            ]
-
-        self.tokens = raw_tokens
-        self.tokens_lower = [token.lower() for token in raw_tokens]
+            self.tokens = raw_tokens
+            self.tokens_lower = [token.lower() for token in raw_tokens]
 
         if self.verbose:
             logger.info("Tokenization complete. Total tokens: %d",
@@ -420,6 +428,9 @@ class RakunKeyphraseDetector:
         keywords = []
         seen_tokens = set()
         for token, score in self.node_ranks.items():
+            if self.hyperparameters['use_byte_tokeniser']:
+                token = enc.decode(list(map(int, token.split(" ")))).strip().lower()
+    
             if token in self.stopwords or len(token) <= 2:
                 continue
             if token not in seen_tokens:
