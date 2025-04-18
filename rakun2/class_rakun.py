@@ -467,7 +467,8 @@ class RakunKeyphraseDetector:
     def find_keywords(self,
                       document: str,
                       input_type: str = "file",
-                      encoding: str = "utf-8", prior_rankings: list = None) -> List[Tuple[str, float]]:
+                      encoding: str = "utf-8",
+                      prior_rankings: list = None) -> List[Tuple[str, float]]:
         """
         Extract and rank keywords from the input document.
 
@@ -504,5 +505,5 @@ class RakunKeyphraseDetector:
                 if prior_keyphrase in keyphrase
             ]
             self.final_keywords = new_keywords
-            
+
         return self.final_keywords[:self.hyperparameters["num_keywords"]]
