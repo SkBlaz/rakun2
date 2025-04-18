@@ -115,8 +115,6 @@ docker run -d -p 8000:8000 --rm -it rakun_test
   - **Keyword extraction from text**: Use `localhost:8000/get_keywords` for analyzing text.
   - **Keyword extraction from PDFs**: Use `localhost:8000/get_keywords_pdf` for analyzing PDF documents.
 
-
-
 # Citing this work
 
 https://link.springer.com/chapter/10.1007/978-3-031-18840-4_27#citeas
