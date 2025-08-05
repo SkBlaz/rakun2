@@ -106,11 +106,11 @@ We provide comprehensive examples showing how to enhance RaKUn2's output using *
 **Quick start:**
 ```bash
 # Install and run HuggingFace example
-pip install transformers torch
+pip install transformers>=4.21.0 torch>=2.0.0
 python examples/huggingface_llm_example.py
 
 # Or try Ollama for local LLMs
-pip install ollama
+pip install ollama>=0.1.7
 python examples/ollama_llm_example.py
 ```
 

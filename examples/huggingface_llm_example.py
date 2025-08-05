@@ -6,7 +6,7 @@ and then enhance the keywords using open-source LLMs from HuggingFace
 Transformers library, without requiring any external API keys.
 
 Requirements:
-    pip install transformers torch
+    pip install transformers>=4.21.0 torch>=2.0.0
     
 The example uses a smaller model (GPT-2) for demonstration, but you can
 use larger models like CodeLlama, Mistral, or other open-source LLMs.

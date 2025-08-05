@@ -19,7 +19,7 @@ Shows how to use HuggingFace Transformers library with models like GPT-2, DialoG
 
 **Requirements**:
 ```bash
-pip install transformers torch
+pip install transformers>=4.21.0 torch>=2.0.0
 ```
 
 **Usage**:
@@ -41,7 +41,7 @@ Demonstrates using Ollama to run LLMs locally for complete privacy and no intern
 **Requirements**:
 1. Install Ollama: https://ollama.ai/
 2. Pull a model: `ollama pull llama2`
-3. Install Python client: `pip install ollama`
+3. Install Python client: `pip install ollama>=0.1.7`
 
 **Usage**:
 ```bash

@@ -20,6 +20,14 @@ from rakun2 import RakunKeyphraseDetector
 import json
 import time
 
+# Configuration parameters for RaKUn2 keyword extraction
+RAKUN_HYPERPARAMETERS = {
+    "num_keywords": 10,
+    "merge_threshold": 1.1,
+    "alpha": 0.3,
+    "token_prune_len": 3
+}
+
 def check_ollama_installation():
     """Check if Ollama is installed and running"""
     try:
@@ -273,14 +281,7 @@ def main():
     # Step 1: Extract keywords using RaKUn2
     print("Step 1: Extracting keywords with RaKUn2...")
     
-    hyperparameters = {
-        "num_keywords": 10,
-        "merge_threshold": 1.1,
-        "alpha": 0.3,
-        "token_prune_len": 3
-    }
-    
-    keyword_detector = RakunKeyphraseDetector(hyperparameters)
+    keyword_detector = RakunKeyphraseDetector(RAKUN_HYPERPARAMETERS)
     original_keywords = keyword_detector.find_keywords(example_document, input_type="string")
     
     print("Original RaKUn2 keywords:")
