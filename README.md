@@ -91,6 +91,29 @@ results in (GPT 4o-preview, Nov 30th 2024).
 
 ```
 
+## Open-Source LLM Examples (No API Keys Required!)
+
+We provide comprehensive examples showing how to enhance RaKUn2's output using **free, open-source LLMs** without any external API keys:
+
+- **🤗 HuggingFace Transformers Example**: Use models like GPT-2, DialoGPT directly from HuggingFace
+- **🦙 Ollama Example**: Run powerful models like Llama2, Mistral locally for complete privacy
+- **📓 Jupyter Notebook**: Interactive examples ready for Google Colab
+
+👉 **[Check out the examples](examples/LLM_EXAMPLES_README.md)** 👈
+
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/SkBlaz/rakun2/blob/main/examples/rakun2_open_source_llm_examples.ipynb)
+
+**Quick start:**
+```bash
+# Install and run HuggingFace example
+pip install transformers>=4.21.0 torch>=2.0.0
+python examples/huggingface_llm_example.py
+
+# Or try Ollama for local LLMs
+pip install ollama>=0.1.7
+python examples/ollama_llm_example.py
+```
+
 # Containers and environments
 A ready-to-go Singularity container can be obtained by invoking
 
